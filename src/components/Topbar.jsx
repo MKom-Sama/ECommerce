@@ -2,25 +2,48 @@ import React, { Component } from "react";
 import styled from "styled-components";
 
 import appLogo from "../assets/svg/a-logo.svg";
-import currencyIcon from "../assets/svg/$.svg";
 import cartIcon from "../assets/svg/cart.svg";
-import upIcon from "../assets/svg/up_arrow.svg";
-import downIcon from "../assets/svg/down_arrow.svg";
+import CurrencyPicker from "./CurrencyPicker";
 
 export default class Topbar extends Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
     return (
       <StyledWrapper>
         <ButtonGroup>
-          <StyledButton>WOMEN</StyledButton>
-          <StyledButton>MEN</StyledButton>
-          <StyledButton>KIDS</StyledButton>
+          <StyledButton
+            onClick={() => this.props.setCategory("women")}
+            btnSelects="women"
+            selectedCat={this.props.category}
+          >
+            WOMEN
+          </StyledButton>
+          <StyledButton
+            onClick={() => this.props.setCategory("men")}
+            btnSelects="men"
+            selectedCat={this.props.category}
+          >
+            MEN
+          </StyledButton>
+          <StyledButton
+            onClick={() => this.props.setCategory("kids")}
+            btnSelects="kids"
+            selectedCat={this.props.category}
+          >
+            KIDS
+          </StyledButton>
         </ButtonGroup>
+
+        {/* LOGO */}
         <NonDraggableImg src={appLogo} alt="logo" />
 
         <ButtonGroup>
-          <StyledIcon src={currencyIcon} alt="logo" />
-          <NonDraggableImg src={downIcon} style={{ marginRight: "1.375em" }} />
+          <CurrencyPicker
+            currency={this.props.currency}
+            setCurrency={this.props.setCurrency}
+          />
           <StyledIcon src={cartIcon} alt="logo" />
         </ButtonGroup>
       </StyledWrapper>
@@ -30,7 +53,7 @@ export default class Topbar extends Component {
 
 /* STYLES */
 const StyledWrapper = styled.div`
-  position: absolute;
+  position: relative;
   left: 0%;
   right: 0%;
   top: 0%;
@@ -56,6 +79,8 @@ const StyledButton = styled.button`
   &:hover {
     border-color: #5ece7b;
   }
+  border-color: ${(props) =>
+    props.btnSelects === props.selectedCat ? "#5ece7b" : "transparent"};
 `;
 const NonDraggableImg = styled.img`
   user-drag: none;

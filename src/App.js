@@ -1,12 +1,31 @@
+import react, { Component } from "react";
 
-import Topbar from './components/Topbar';
+import ProductList from "./components/ProductList";
+import Topbar from "./components/Topbar";
 
-function App() {
-  return (
-    <div>
-      <Topbar />
-    </div>
-  );
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      category: "women", // women || men || kids
+      currency: "USD", // USD || EUR || JPY
+    };
+  }
+  setCategory = (cat) => this.setState({ category: cat });
+  setCurrency = (cur) => this.setState({ currency: cur });
+  render() {
+    return (
+      <div>
+        <Topbar
+          setCategory={this.setCategory}
+          category={this.state.category}
+          setCurrency={this.setCurrency}
+          currency={this.state.currency}
+        />
+        <ProductList category={this.state.category} />
+      </div>
+    );
+  }
 }
 
 export default App;

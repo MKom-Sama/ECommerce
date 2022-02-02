@@ -14,6 +14,22 @@ body {
   user-select: none; /* CSS3 */
 }
 
+/* Global Animation Classes */
+@keyframes fade {
+  from {
+    display: none;
+    opacity: 0;
+  }
+  to {
+    display: block;
+    opacity: 1;
+  }
+}
+.fade-on-display {
+  animation: fade 0.4s linear;
+  animation-fill-mode: forwards;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
