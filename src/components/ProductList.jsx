@@ -51,7 +51,7 @@ const StyledWrapper = styled.div`
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
   grid-gap: 5%;
   padding-top: 4%;
   padding-bottom:5%;

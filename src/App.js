@@ -1,6 +1,7 @@
 import react, { Component } from "react";
 
 import ProductList from "./components/ProductList";
+import ProductPage from "./components/ProductPage";
 import Topbar from "./components/Topbar";
 
 class App extends Component {
@@ -22,7 +23,8 @@ class App extends Component {
           setCurrency={this.setCurrency}
           currency={this.state.currency}
         />
-        <ProductList category={this.state.category} />
+        {/* <ProductList category={this.state.category} /> */}
+        <ProductPage />
       </div>
     );
   }

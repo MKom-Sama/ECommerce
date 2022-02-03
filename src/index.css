@@ -14,6 +14,12 @@ body {
   user-select: none; /* CSS3 */
 }
 
+/* Global */
+*{
+  font-family: Raleway;
+  font-weight: bold;
+}
+
 /* Global Animation Classes */
 @keyframes fade {
   from {
@@ -28,6 +34,31 @@ body {
 .fade-on-display {
   animation: fade 0.4s linear;
   animation-fill-mode: forwards;
+}
+
+/* Media Queries */
+.responsive-flex {
+  display: flex;
+  flex-direction: row;
+}
+.hide-grid-on-small{
+  display: grid;
+}
+.half-to-full-width{
+  width: 50%;
+}
+/* Mobile */
+@media only screen and (max-width: 768px) {
+  /* Product Details Page  */
+  .responsive-flex {
+    flex-direction: column;
+  }
+  .hide-grid-on-small{
+    display: none;
+  }
+  .half-to-full-width{
+    width: 100%;
+  }
 }
 
 /*-------INVISIBLE SCROLLBAR-------*/
