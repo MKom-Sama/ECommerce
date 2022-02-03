@@ -30,6 +30,28 @@ body {
   animation-fill-mode: forwards;
 }
 
+/*-------INVISIBLE SCROLLBAR-------*/
+
+/* width */
+::-webkit-scrollbar {
+  width: 100%;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background-color: transparent;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
