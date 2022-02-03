@@ -25,7 +25,7 @@ export default class ProductList extends Component {
         <span style={{ fontSize: "2em" }}>
           {this.props.category.toUpperCase()}
         </span>
-        <Grid className="responsive-grid">
+        <Grid>
           {this.state.products.map((product) => (
             <ProductItem>
               <ProductImg src={product.img} />

@@ -89,6 +89,7 @@ const DropDownContent = styled.div`
   width: 114px;
   border-radius: 5px;
   display: ${(props) => (props.visible ? "block" : "none")};
+  background-color: #ffffff;
 `;
 const CurrencyList = styled.ul`
   list-style: none;

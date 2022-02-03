@@ -53,17 +53,19 @@ export default class Topbar extends Component {
 
 /* STYLES */
 const StyledWrapper = styled.div`
-  position: relative;
+  position: sticky;
   left: 0%;
   right: 0%;
   top: 0%;
-  margin: 1% 7.013% 0% 8.125%;
+  padding: 1% 7.013% 0% 8.125%;
   min-height: 80px;
   height: 5.57%;
   display: flex;
   flex-direction: "row";
   justify-content: space-between;
   align-content: center;
+  background-color:#ffffff;
+  z-index:1;
 `;
 const StyledButton = styled.button`
   all: unset;
