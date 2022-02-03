@@ -16,7 +16,7 @@ export default class PDPStyledWrapper extends Component {
       <StyledWrapper>
         <h1>{dummyProduct.name}</h1>
 
-        <strong>SIZE:</strong>
+        <strong style={{ fontFamily: "Roboto Condensed" }}>SIZE:</strong>
         <Sizes>
           <Size
             btnSelects="xsm"
@@ -48,7 +48,7 @@ export default class PDPStyledWrapper extends Component {
           </Size>
         </Sizes>
         <br />
-        <strong>PRICE:</strong>
+        <strong style={{ fontFamily: "Roboto Condensed" }}>PRICE:</strong>
         <br />
         <strong style={{ fontSize: "2em" }}>${dummyProduct.price}</strong>
         <br />
@@ -85,6 +85,7 @@ const Size = styled.div`
   margin: 10px;
   font-size: 1.8em;
   border: 3px solid black;
+  border-radius:5px;
   background-color: ${(props) =>
     props.btnSelects === props.selectedSize ? "#000000" : "#ffffff"};
   color: ${(props) =>
