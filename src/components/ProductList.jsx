@@ -3,21 +3,29 @@ import styled from "styled-components";
 
 import cartIcon from "../assets/svg/cart.svg";
 
-let dummyData = [
-  { name: "Apollo Running Short", img: "https://t.ly/aHT0", price: "25.55" },
-  { name: "Apollo Running Short", img: "https://t.ly/aHT0", price: "25.55" },
-  { name: "Apollo Running Short", img: "https://t.ly/D8OR", price: "25.55" },
-  { name: "Apollo Running Short", img: "https://t.ly/aHT0", price: "25.55" },
-  { name: "Apollo Running Short", img: "https://t.ly/aHT0", price: "25.55" },
-  { name: "Apollo Running Short", img: "https://t.ly/aHT0", price: "25.55" },
-];
+import { getProducts } from "../graphQL";
 
 export default class ProductList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      products: dummyData,
+      products: [],
     };
+  }
+  componentDidMount() {
+    getProducts().then((result) => this.setState({ products: result }));
+  }
+  getCurrencySymbol(curr) {
+    switch (curr) {
+      case "USD":
+        return "$";
+      case "GBP":
+        return "£";
+      case "JPY":
+        return "¥";
+      default:
+        break;
+    }
   }
   render() {
     return (
@@ -27,15 +35,19 @@ export default class ProductList extends Component {
         </span>
         <Grid>
           {this.state.products.map((product) => (
-            <ProductItem>
-              <ProductImg src={product.img} />
+            <ProductItem key={product.id}>
+              <ProductImg src={product.gallery[0]} />
               <AddToCartButton>
                 <CartIcon src={cartIcon} />
               </AddToCartButton>
               <span style={{ fontSize: "1.4em" }}>{product.name}</span>
               <span style={{ fontSize: "1.2em", marginTop: 8 }}>
-                <strong>$</strong>
-                {product.price}
+                <strong>{this.getCurrencySymbol(this.props.currency)}</strong>
+                {
+                  product.prices.filter(
+                    (price) => price.currency.label == this.props.currency
+                  )[0].amount
+                }
               </span>
             </ProductItem>
           ))}
@@ -54,19 +66,19 @@ const Grid = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
   grid-gap: 5%;
   padding-top: 4%;
-  padding-bottom:5%;
+  padding-bottom: 5%;
 `;
 
 const ProductItem = styled.div`
   display: flex;
   flex-direction: column;
   padding: 1rem;
-  padding-bottom:10px;
+  padding-bottom: 10px;
   border-radius: 5px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  transition:transform .5s ease;
-  &:hover{
-    transform:scale(1.01)
+  transition: transform 0.5s ease;
+  &:hover {
+    transform: scale(1.01);
   }
 `;
 const ProductImg = styled.img`

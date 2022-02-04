@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 // Currencies
 import USDIcon from "../assets/svg/USD.svg";
-import EURIcon from "../assets/svg/EUR.svg";
+import GBPIcon from "../assets/svg/GBP.svg";
 import JPYIcon from "../assets/svg/JPY.svg";
 
 import upIcon from "../assets/svg/up_arrow.svg";
@@ -21,8 +21,8 @@ export default class CurrencyPicker extends Component {
     switch (this.props.currency) {
       case "USD":
         return USDIcon;
-      case "EUR":
-        return EURIcon;
+      case "GBP":
+        return GBPIcon;
       case "JPY":
         return JPYIcon;
       default:
@@ -54,8 +54,8 @@ export default class CurrencyPicker extends Component {
               <StyledIcon src={USDIcon} />
               USD
             </Styledli>
-            <Styledli onClick={() => this.props.setCurrency("EUR")}>
-              <StyledIcon src={EURIcon} />
+            <Styledli onClick={() => this.props.setCurrency("GBP")}>
+              <StyledIcon src={GBPIcon} />
               EUR
             </Styledli>
             <Styledli onClick={() => this.props.setCurrency("JPY")}>

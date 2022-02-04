@@ -9,7 +9,7 @@ class App extends Component {
     super(props);
     this.state = {
       category: "women", // women || men || kids
-      currency: "USD", // USD || EUR || JPY
+      currency: "USD", // USD || GBP || JPY
     };
   }
   setCategory = (cat) => this.setState({ category: cat });
@@ -23,8 +23,8 @@ class App extends Component {
           setCurrency={this.setCurrency}
           currency={this.state.currency}
         />
-        {/* <ProductList category={this.state.category} /> */}
-        <ProductPage />
+        <ProductList category={this.state.category} currency={this.state.currency} />
+        {/* <ProductPage /> */}
       </div>
     );
   }
