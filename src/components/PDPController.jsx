@@ -1,20 +1,26 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 
-let dummyProduct = {
-  name: "Apollo Running Short",
-  img: "https://t.ly/aHT0",
-  price: "25.55",
-};
-
 export default class PDPStyledWrapper extends Component {
   constructor(props) {
     super(props);
   }
+  getCurrencySymbol(curr) {
+    switch (curr) {
+      case "USD":
+        return "$";
+      case "GBP":
+        return "£";
+      case "JPY":
+        return "¥";
+      default:
+        break;
+    }
+  }
   render() {
     return (
       <StyledWrapper>
-        <h1>{dummyProduct.name}</h1>
+        <h1>{this.props.product.name}</h1>
 
         <strong style={{ fontFamily: "Roboto Condensed" }}>SIZE:</strong>
         <Sizes>
@@ -50,7 +56,14 @@ export default class PDPStyledWrapper extends Component {
         <br />
         <strong style={{ fontFamily: "Roboto Condensed" }}>PRICE:</strong>
         <br />
-        <strong style={{ fontSize: "2em" }}>${dummyProduct.price}</strong>
+        <strong style={{ fontSize: "2em" }}>
+          {this.getCurrencySymbol(this.props.currency)}
+          {
+            this.props.product.prices.filter(
+              (price) => price.currency.label == this.props.currency
+            )[0].amount
+          }
+        </strong>
         <br />
         <br />
         <br />
@@ -85,7 +98,7 @@ const Size = styled.div`
   margin: 10px;
   font-size: 1.8em;
   border: 3px solid black;
-  border-radius:5px;
+  border-radius: 5px;
   background-color: ${(props) =>
     props.btnSelects === props.selectedSize ? "#000000" : "#ffffff"};
   color: ${(props) =>

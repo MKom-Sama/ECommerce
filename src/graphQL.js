@@ -1,8 +1,6 @@
 import {
   ApolloClient,
   InMemoryCache,
-  ApolloProvider,
-  useQuery,
   gql,
 } from "@apollo/client";
 
@@ -13,11 +11,10 @@ const client = new ApolloClient({
 
 // Functions
 
-// Get All Products
 const getProducts = async () => {
   let { data } = await client.query({
     query: gql`
-      query GetRates {
+      query GetProducts {
         category {
           products {
             id
@@ -35,10 +32,31 @@ const getProducts = async () => {
       }
     `,
   });
-  console.log(data.category.products)
   return data.category.products;
 };
 
-getProducts();
+const getProductByID = async (p_id) => {
+  let { data } = await client.query({
+    query: gql`
+      query GetProductByID($pid: String!) {
+        product(id: $pid) {
+          id
+          name
+          gallery
+          prices {
+            amount
+            currency {
+              label
+            }
+          }
+        }
+      }
+    `,
+    variables: {
+      pid: p_id,
+    },
+  });
+  return data.product;
+};
 
-export { getProducts };
+export { getProducts, getProductByID };

@@ -1,4 +1,5 @@
 import react, { Component } from "react";
+import { BrowserRouter, Link, Route, Routes, Navigate } from "react-router-dom";
 
 import ProductList from "./components/ProductList";
 import ProductPage from "./components/ProductPage";
@@ -17,14 +18,30 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Topbar
-          setCategory={this.setCategory}
-          category={this.state.category}
-          setCurrency={this.setCurrency}
-          currency={this.state.currency}
-        />
-        <ProductList category={this.state.category} currency={this.state.currency} />
-        {/* <ProductPage /> */}
+        <BrowserRouter>
+          <Topbar
+            setCategory={this.setCategory}
+            category={this.state.category}
+            setCurrency={this.setCurrency}
+            currency={this.state.currency}
+          />
+          <Routes>
+            <Route
+              exact
+              path="/"
+              element={
+                <ProductList
+                  category={this.state.category}
+                  currency={this.state.currency}
+                />
+              }
+            />
+            <Route
+              path="/product/:id"
+              element={<ProductPage currency={this.state.currency} />}
+            />
+          </Routes>
+        </BrowserRouter>
       </div>
     );
   }

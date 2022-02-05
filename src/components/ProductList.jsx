@@ -1,5 +1,8 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
+
+
 
 import cartIcon from "../assets/svg/cart.svg";
 
@@ -36,19 +39,32 @@ export default class ProductList extends Component {
         <Grid>
           {this.state.products.map((product) => (
             <ProductItem key={product.id}>
-              <ProductImg src={product.gallery[0]} />
-              <AddToCartButton>
-                <CartIcon src={cartIcon} />
-              </AddToCartButton>
-              <span style={{ fontSize: "1.4em" }}>{product.name}</span>
-              <span style={{ fontSize: "1.2em", marginTop: 8 }}>
-                <strong>{this.getCurrencySymbol(this.props.currency)}</strong>
-                {
-                  product.prices.filter(
-                    (price) => price.currency.label == this.props.currency
-                  )[0].amount
-                }
-              </span>
+              <Link
+                style={{
+                  all: "initial",
+                  display: "flex",
+                  flexDirection: "column",
+                  flex: 1,
+                  maxHeight: '80%',
+                }}
+                to={`/product/${product.id}`}
+              >
+                <ProductImg src={product.gallery[0]} />
+              </Link>
+                <AddToCartButton onClick={() => console.log("clicked me")}>
+                  <CartIcon src={cartIcon} />
+                </AddToCartButton>
+              <Link style={{all:'initial',cursor:'pointer'}} to={`/product/${product.id}`}>
+                <span style={{ fontSize: "1.4em" }}>{product.name}</span>
+                </Link>
+                <span style={{ fontSize: "1.2em", marginTop: 8 }}>
+                  <strong>{this.getCurrencySymbol(this.props.currency)}</strong>
+                  {
+                    product.prices.filter(
+                      (price) => price.currency.label == this.props.currency
+                    )[0].amount
+                  }
+                </span>
             </ProductItem>
           ))}
         </Grid>
@@ -81,10 +97,13 @@ const ProductItem = styled.div`
     transform: scale(1.01);
   }
 `;
+const StyledLink = styled.div``;
 const ProductImg = styled.img`
-  max-height: 80%;
+  max-height:95%;
   flex: 1;
   object-fit: cover;
+  padding-bottom:0;
+  margin-bottom:-40%;
 `;
 
 const AddToCartButton = styled.button`
@@ -95,7 +114,7 @@ const AddToCartButton = styled.button`
   height: 52px;
   border-radius: 100%;
   align-self: flex-end;
-  margin-top: -5%;
+  margin-top: -10%;
   margin-right: 5%;
   justify-content: center;
   cursor: pointer;
