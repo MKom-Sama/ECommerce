@@ -64,6 +64,8 @@ const MiniGallery = styled.div`
   ${"" /* display: grid;  is grid thro class */}
   grid-gap: 10px;
   grid-template-columns: 1fr;
+  max-width:10%;
+  ${'' /* max-height:26%; */}
 `;
 
 const StyledDiv = styled.div`
@@ -73,8 +75,8 @@ const StyledDiv = styled.div`
 `;
 
 const MiniImage = styled.img`
-  max-width: 100%;
-  max-height: 100%;
+  max-width: 90%;
+  max-height: 70%;
   object-fit: cover;
 `;
 const MainImage = styled.img`
