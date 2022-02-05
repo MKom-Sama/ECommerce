@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-
-
+// Icons
 import cartIcon from "../assets/svg/cart.svg";
 
+// Utils
+import { getCurrencySymbol } from "../utils";
 import { getProducts } from "../graphQL";
 
 export default class ProductList extends Component {
@@ -17,18 +18,6 @@ export default class ProductList extends Component {
   }
   componentDidMount() {
     getProducts().then((result) => this.setState({ products: result }));
-  }
-  getCurrencySymbol(curr) {
-    switch (curr) {
-      case "USD":
-        return "$";
-      case "GBP":
-        return "£";
-      case "JPY":
-        return "¥";
-      default:
-        break;
-    }
   }
   render() {
     return (
@@ -45,26 +34,29 @@ export default class ProductList extends Component {
                   display: "flex",
                   flexDirection: "column",
                   flex: 1,
-                  maxHeight: '80%',
+                  maxHeight: "80%",
                 }}
                 to={`/product/${product.id}`}
               >
                 <ProductImg src={product.gallery[0]} />
               </Link>
-                <AddToCartButton onClick={() => console.log("clicked me")}>
-                  <CartIcon src={cartIcon} />
-                </AddToCartButton>
-              <Link style={{all:'initial',cursor:'pointer'}} to={`/product/${product.id}`}>
+              <AddToCartButton onClick={() => console.log("clicked me")}>
+                <CartIcon src={cartIcon} />
+              </AddToCartButton>
+              <Link
+                style={{ all: "initial", cursor: "pointer" }}
+                to={`/product/${product.id}`}
+              >
                 <span style={{ fontSize: "1.4em" }}>{product.name}</span>
-                </Link>
-                <span style={{ fontSize: "1.2em", marginTop: 8 }}>
-                  <strong>{this.getCurrencySymbol(this.props.currency)}</strong>
-                  {
-                    product.prices.filter(
-                      (price) => price.currency.label == this.props.currency
-                    )[0].amount
-                  }
-                </span>
+              </Link>
+              <span style={{ fontSize: "1.2em", marginTop: 8 }}>
+                <strong>{getCurrencySymbol(this.props.currency)}</strong>
+                {
+                  product.prices.filter(
+                    (price) => price.currency.label == this.props.currency
+                  )[0].amount
+                }
+              </span>
             </ProductItem>
           ))}
         </Grid>
@@ -73,6 +65,7 @@ export default class ProductList extends Component {
   }
 }
 
+// Styles
 const StyledWrapper = styled.div`
   padding: 2% 7.013% 0% 8.125%;
 `;
@@ -97,13 +90,13 @@ const ProductItem = styled.div`
     transform: scale(1.01);
   }
 `;
-const StyledLink = styled.div``;
+
 const ProductImg = styled.img`
-  max-height:95%;
+  max-height: 95%;
   flex: 1;
   object-fit: cover;
-  padding-bottom:0;
-  margin-bottom:-40%;
+  padding-bottom: 0;
+  margin-bottom: -40%;
 `;
 
 const AddToCartButton = styled.button`

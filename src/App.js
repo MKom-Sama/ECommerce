@@ -1,8 +1,8 @@
 import react, { Component } from "react";
 import { BrowserRouter, Link, Route, Routes, Navigate } from "react-router-dom";
 
-import ProductList from "./components/ProductList";
-import ProductPage from "./components/ProductPage";
+import ProductList from "./pages/ProductList";
+import ProductDetails from "./pages/ProductDetails";
 import Topbar from "./components/Topbar";
 
 class App extends Component {
@@ -38,7 +38,7 @@ class App extends Component {
             />
             <Route
               path="/product/:id"
-              element={<ProductPage currency={this.state.currency} />}
+              element={<ProductDetails currency={this.state.currency} />}
             />
           </Routes>
         </BrowserRouter>

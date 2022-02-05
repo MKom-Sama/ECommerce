@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 
+// Icons
 import appLogo from "../assets/svg/a-logo.svg";
 import cartIcon from "../assets/svg/cart.svg";
+
+// Components
 import CurrencyPicker from "./CurrencyPicker";
 
 export default class Topbar extends Component {

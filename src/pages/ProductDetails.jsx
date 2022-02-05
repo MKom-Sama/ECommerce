@@ -1,9 +1,14 @@
 import React, { Component } from "react";
-import styled from "styled-components";
-import PDPController from "./PDPController";
 
+import styled from "styled-components";
+
+// Components
+import PDPController from "../components/PDPController";
+
+// Utils
 import { getProductByID } from "../graphQL";
 
+// initial state
 let loadingProduct = {
   name: "loading...",
   gallery: ["https://t.ly/aHT0"],
@@ -13,7 +18,8 @@ let loadingProduct = {
     { amount: 0.0, currency: { label: "JPY" } },
   ],
 };
-export default class ProductPage extends Component {
+
+export default class ProductDetails extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -52,6 +58,8 @@ export default class ProductPage extends Component {
     );
   }
 }
+
+// Styles
 const StyledWrapper = styled.div`
   padding: 2% 7.013% 0% 8.125%;
   display: flex;
@@ -64,8 +72,8 @@ const MiniGallery = styled.div`
   ${"" /* display: grid;  is grid thro class */}
   grid-gap: 10px;
   grid-template-columns: 1fr;
-  max-width:10%;
-  ${'' /* max-height:26%; */}
+  max-width: 10%;
+  ${"" /* max-height:26%; */}
 `;
 
 const StyledDiv = styled.div`
