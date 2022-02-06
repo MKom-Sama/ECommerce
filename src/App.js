@@ -11,10 +11,13 @@ class App extends Component {
     this.state = {
       category: "women", // women || men || kids
       currency: "USD", // USD || GBP || JPY
+      cart:[]
     };
   }
   setCategory = (cat) => this.setState({ category: cat });
   setCurrency = (cur) => this.setState({ currency: cur });
+  // cart functions
+
   render() {
     return (
       <div>

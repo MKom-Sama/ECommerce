@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import ProductList from "../pages/ProductList";
 
 export default class PDPStyledWrapper extends Component {
   constructor(props) {
@@ -70,11 +71,11 @@ export default class PDPStyledWrapper extends Component {
         <AddToCartButton className="half-to-full-width">
           ADD TO CART
         </AddToCartButton>
-        <ProductDescription className="half-to-full-width">
-          Nulla deserunt est dolor cillum do. Sint sit aliquip proident aliquip.
-          Non commodo tempor elit deserunt deserunt magna cupidatat esse. Id
-          consequat fugiat nisi eu. Ex quis reprehenderit laboris culpa minim do
-          ullamco. Officia pariatur ut tempor consequat eu quis non id.
+        <ProductDescription
+          dangerouslySetInnerHTML={{ __html: this.props.product.description }}
+          className="half-to-full-width"
+        >
+          {/* {this.props.product.description} */}
         </ProductDescription>
       </StyledWrapper>
     );
@@ -96,7 +97,9 @@ const Size = styled.div`
   align-items: center;
   justify-content: center;
   margin: 10px;
-  font-size: 1.8em;
+  font-family: "Raleaway";
+  font-weight: 100;
+  font-size: 1.4em;
   border: 3px solid black;
   border-radius: 5px;
   background-color: ${(props) =>
@@ -123,5 +126,10 @@ const AddToCartButton = styled.button`
 `;
 
 const ProductDescription = styled.p`
+  display: -webkit-box;
+  white-space: nowrap;
+  overflow: scroll;
   padding: 1%;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
 `;

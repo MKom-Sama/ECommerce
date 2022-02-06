@@ -42,6 +42,7 @@ const getProductByID = async (p_id) => {
         product(id: $pid) {
           id
           name
+          description
           gallery
           prices {
             amount
@@ -56,6 +57,7 @@ const getProductByID = async (p_id) => {
       pid: p_id,
     },
   });
+  // console.log(data.product)
   return data.product;
 };
 
