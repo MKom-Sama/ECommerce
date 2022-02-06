@@ -11,13 +11,37 @@ class App extends Component {
     this.state = {
       category: "women", // women || men || kids
       currency: "USD", // USD || GBP || JPY
-      cart:[]
+      cart: [], // { pid , name , prices , quantity , size }
     };
   }
   setCategory = (cat) => this.setState({ category: cat });
   setCurrency = (cur) => this.setState({ currency: cur });
   // cart functions
+  addNewItem = ({ pid, name, prices, size }) => {
+    console.log('oni chan')
+    this.setState((state) => {
+      // check for duplicates & removes it
+      console.log('before Filter :',state.cart)
+      let newCart = [...state.cart].filter(
+        (item) => ((pid != item.pid) || (pid == item.pid && size != item.size))
+      );
 
+      // resets the quantity on duplicate entries
+      let newItem = {
+        pid,
+        name,
+        prices,
+        quantity: 1,
+        size,
+      };
+      console.log([...newCart, newItem])
+      return { cart: [...newCart, newItem] };
+    });
+  };
+
+  componentDidUpdate() {
+    console.log("cart : ", this.state.cart);
+  }
   render() {
     return (
       <div>
@@ -36,6 +60,7 @@ class App extends Component {
                 <ProductList
                   category={this.state.category}
                   currency={this.state.currency}
+                  addNewItem={this.addNewItem}
                 />
               }
             />

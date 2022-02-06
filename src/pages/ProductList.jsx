@@ -40,7 +40,16 @@ export default class ProductList extends Component {
               >
                 <ProductImg src={product.gallery[0]} />
               </Link>
-              <AddToCartButton onClick={() => console.log("clicked me")}>
+              <AddToCartButton
+                onClick={() =>
+                  this.props.addNewItem({
+                    pid: product.id,
+                    name: product.name,
+                    prices: product.prices,
+                    size: "xsm",
+                  })
+                }
+              >
                 <CartIcon src={cartIcon} />
               </AddToCartButton>
               <Link

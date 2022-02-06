@@ -15,7 +15,7 @@ body {
 }
 
 /* Global */
-*{
+* {
   font-family: Raleway;
   font-weight: bold;
 }
@@ -41,10 +41,10 @@ body {
   display: flex;
   flex-direction: row;
 }
-.hide-grid-on-small{
+.hide-grid-on-small {
   display: grid;
 }
-.half-to-full-width{
+.half-to-full-width {
   width: 50%;
   max-width: 75ch;
 }
@@ -54,10 +54,10 @@ body {
   .responsive-flex {
     flex-direction: column;
   }
-  .hide-grid-on-small{
+  .hide-grid-on-small {
     display: none;
   }
-  .half-to-full-width{
+  .half-to-full-width {
     width: 100%;
     max-width: 45ch;
   }
