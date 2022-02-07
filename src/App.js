@@ -18,7 +18,6 @@ class App extends Component {
   setCurrency = (cur) => this.setState({ currency: cur });
   // cart functions
   addNewItem = ({ pid, name, prices, size, gallery }) => {
-    console.log("oni chan");
     this.setState((state) => {
       // check for duplicates & removes it
       console.log("before Filter :", state.cart);
@@ -33,13 +32,56 @@ class App extends Component {
         prices,
         quantity: 1,
         size,
-        gallery
+        gallery,
       };
       console.log([...newCart, newItem]);
       return { cart: [...newCart, newItem] };
     });
   };
+  modifyItemCount = (pid, val) => {
+    this.setState((state) => {
+      let newCart = [];
+      state.cart.forEach((item) => {
+        if (item.pid === pid) {
+          item.quantity += 0.5 * val; // idk why 0.5 too but it works
+        }
 
+        if (item.quantity >= 1) {
+          newCart.push(item);
+        }
+      });
+      return { cart: newCart };
+    });
+  };
+  modifyItemSize = (pid, newSize) => {
+    this.setState((state) => {
+      let newCart = [];
+      state.cart.forEach((item) => {
+        if (item.pid === pid) {
+          item.size = newSize;
+        }
+        newCart.push(item);
+      });
+
+      return { cart: newCart };
+    });
+  };
+  getItemCount = () => {
+    let count = 0;
+    this.state.cart.forEach((item) => (count += item.quantity));
+    return count;
+  };
+  getCartTotalPrice = () => {
+    let sum = 0;
+    this.state.cart.forEach((item) => {
+      sum +=
+        item.quantity *
+        item.prices.filter(
+          (price) => price.currency.label == this.state.currency
+        )[0].amount;
+    });
+    return sum;
+  };
   componentDidUpdate() {
     console.log("cart : ", this.state.cart);
   }
@@ -53,6 +95,10 @@ class App extends Component {
             setCurrency={this.setCurrency}
             currency={this.state.currency}
             cart={this.state.cart}
+            modifyItemCount={this.modifyItemCount}
+            modifyItemSize={this.modifyItemSize}
+            getItemCount={this.getItemCount}
+            getCartTotalPrice={this.getCartTotalPrice}
           />
           <Routes>
             <Route

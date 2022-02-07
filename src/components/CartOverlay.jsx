@@ -5,6 +5,8 @@ import styled from "styled-components";
 import cartIcon from "../assets/svg/cart.svg";
 import CO_ItemList from "./CO_ItemList";
 
+import { getCurrencySymbol } from "../utils";
+
 export default class CartOverlay extends Component {
   constructor(props) {
     super(props);
@@ -12,6 +14,7 @@ export default class CartOverlay extends Component {
       showCartOverlay: true,
     };
   }
+
   render() {
     return (
       <>
@@ -28,9 +31,14 @@ export default class CartOverlay extends Component {
           visible={this.state.showCartOverlay}
           className="fade-on-display"
         >
-          <Text>My Bag,</Text> 2 items
+          <Text>My Bag,</Text> {this.props.getItemCount()} items
           <br />
-          <CO_ItemList cart={this.props.cart} />
+          <CO_ItemList
+            cart={this.props.cart}
+            currency={this.props.currency}
+            modifyItemCount={this.props.modifyItemCount}
+            modifyItemSize={this.props.modifyItemSize}
+          />
           <div
             style={{
               display: "flex",
@@ -39,7 +47,10 @@ export default class CartOverlay extends Component {
             }}
           >
             <strong style={{ fontFamily: "Roboto Condensed" }}>Total</strong>
-            <strong style={{ fontWeight: "bold" }}>$200</strong>
+            <strong style={{ fontWeight: "bold" }}>
+              {getCurrencySymbol(this.props.currency)}
+              {this.props.getCartTotalPrice()}
+            </strong>
           </div>
           <div
             style={{

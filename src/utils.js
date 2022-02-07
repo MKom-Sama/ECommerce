@@ -1,4 +1,5 @@
 const getCurrencySymbol = (curr) => {
+
   switch (curr) {
     case "USD":
       return "$";

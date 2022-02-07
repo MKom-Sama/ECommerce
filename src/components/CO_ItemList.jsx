@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
+import { getCurrencySymbol } from "../utils";
 export default class CO_ItemList extends Component {
   constructor(props) {
     super(props);
@@ -22,13 +23,42 @@ export default class CO_ItemList extends Component {
               >
                 <Text style={{ fontWeight: 500 }}>{item.name}</Text>
                 <Text style={{ fontWeight: 900 }}>
-                  ${item.prices[0].amount}
+                  {getCurrencySymbol(this.props.currency)}
+                  {
+                    item.prices.filter(
+                      (price) => price.currency.label == this.props.currency
+                    )[0].amount
+                  }
                 </Text>
                 <Sizes>
-                  <Box>XS</Box>
-                  <Box>S</Box>
-                  <Box>M</Box>
-                  <Box>L</Box>
+                  <Box
+                    name="xsm"
+                    selectedSize={item.size}
+                    onClick={() => this.props.modifyItemSize(item.pid, "xsm")}
+                  >
+                    XS
+                  </Box>
+                  <Box
+                    name="sm"
+                    selectedSize={item.size}
+                    onClick={() => this.props.modifyItemSize(item.pid, "sm")}
+                  >
+                    S
+                  </Box>
+                  <Box
+                    name="md"
+                    selectedSize={item.size}
+                    onClick={() => this.props.modifyItemSize(item.pid, "md")}
+                  >
+                    M
+                  </Box>
+                  <Box
+                    name="lrg"
+                    selectedSize={item.size}
+                    onClick={() => this.props.modifyItemSize(item.pid, "lrg")}
+                  >
+                    L
+                  </Box>
                 </Sizes>
               </div>
               <div
@@ -40,9 +70,21 @@ export default class CO_ItemList extends Component {
                   textAlign: "center",
                 }}
               >
-                <Box style={{ alignSelf: "center" }}>+</Box>
+                <Box
+                  name="plus"
+                  style={{ alignSelf: "center" }}
+                  onClick={() => this.props.modifyItemCount(item.pid, 1)}
+                >
+                  +
+                </Box>
                 <span>{item.quantity}</span>
-                <Box style={{ alignSelf: "center" }}>-</Box>
+                <Box
+                  name="minus"
+                  style={{ alignSelf: "center" }}
+                  onClick={() => this.props.modifyItemCount(item.pid, -1)}
+                >
+                  -
+                </Box>
               </div>
               <img
                 style={{ flex: 2, maxWidth: "105px", maxHeight: "137px" }}
@@ -74,7 +116,7 @@ const CartItem = styled.ul`
   flex-direction: row;
   padding: 8px;
   margin-bottom: 5px;
-  background: #f7f7f7;
+  background: #fafafa;
   border-radius: 5px;
 `;
 const Sizes = styled.div`
@@ -94,8 +136,22 @@ const Box = styled.button`
   height: 24px;
   border: 2px solid black;
   text-align: center;
-  cursor:pointer;
+  font-family: Source Sans Pro;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  ${(props) =>
+    props.name === props.selectedSize
+      ? css`
+          cursor: default;
+          background: #d7dee3;
+          color: #000000;
+          border: 2px solid #d7dee3;
+        `
+      : css`
+          cursor: pointer;
+        `}
   &:hover {
-    background-color: #e1e8ed;
+    background-color: #d7dee3;
   }
 `;
