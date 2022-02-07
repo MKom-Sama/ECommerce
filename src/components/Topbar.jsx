@@ -3,10 +3,10 @@ import styled from "styled-components";
 
 // Icons
 import appLogo from "../assets/svg/a-logo.svg";
-import cartIcon from "../assets/svg/cart.svg";
 
 // Components
 import CurrencyPicker from "./CurrencyPicker";
+import CartOverlay from "./CartOverlay";
 
 export default class Topbar extends Component {
   constructor(props) {
@@ -47,7 +47,7 @@ export default class Topbar extends Component {
             currency={this.props.currency}
             setCurrency={this.props.setCurrency}
           />
-          <StyledIcon src={cartIcon} alt="logo" />
+          <CartOverlay cart={this.props.cart} />
         </ButtonGroup>
       </StyledWrapper>
     );
@@ -67,8 +67,8 @@ const StyledWrapper = styled.div`
   flex-direction: "row";
   justify-content: space-between;
   align-content: center;
-  background-color:#ffffff;
-  z-index:1;
+  background-color: #ffffff;
+  z-index: 1;
 `;
 const StyledButton = styled.button`
   all: unset;

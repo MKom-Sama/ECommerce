@@ -17,13 +17,13 @@ class App extends Component {
   setCategory = (cat) => this.setState({ category: cat });
   setCurrency = (cur) => this.setState({ currency: cur });
   // cart functions
-  addNewItem = ({ pid, name, prices, size }) => {
-    console.log('oni chan')
+  addNewItem = ({ pid, name, prices, size, gallery }) => {
+    console.log("oni chan");
     this.setState((state) => {
       // check for duplicates & removes it
-      console.log('before Filter :',state.cart)
+      console.log("before Filter :", state.cart);
       let newCart = [...state.cart].filter(
-        (item) => ((pid != item.pid) || (pid == item.pid && size != item.size))
+        (item) => pid != item.pid || (pid == item.pid && size != item.size)
       );
 
       // resets the quantity on duplicate entries
@@ -33,8 +33,9 @@ class App extends Component {
         prices,
         quantity: 1,
         size,
+        gallery
       };
-      console.log([...newCart, newItem])
+      console.log([...newCart, newItem]);
       return { cart: [...newCart, newItem] };
     });
   };
@@ -51,6 +52,7 @@ class App extends Component {
             category={this.state.category}
             setCurrency={this.setCurrency}
             currency={this.state.currency}
+            cart={this.state.cart}
           />
           <Routes>
             <Route

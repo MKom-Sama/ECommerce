@@ -47,6 +47,7 @@ export default class ProductList extends Component {
                     name: product.name,
                     prices: product.prices,
                     size: "xsm",
+                    gallery: product.gallery,
                   })
                 }
               >
