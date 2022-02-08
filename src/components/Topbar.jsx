@@ -61,6 +61,12 @@ export default class Topbar extends Component {
             visCartOverlay={this.props.visCartOverlay}
             togCartOverlay={this.props.togCartOverlay}
           />
+          <Badge
+            numItems={this.props.getItemCount()}
+            className="fade-on-display"
+          >
+            {this.props.getItemCount()}
+          </Badge>
         </ButtonGroup>
       </StyledWrapper>
     );
@@ -99,6 +105,20 @@ const StyledButton = styled.button`
   }
   border-color: ${(props) =>
     props.btnSelects === props.selectedCat ? "#5ece7b" : "transparent"};
+`;
+const Badge = styled.div`
+  position: absolute;
+  right: 6.4%;
+  top: 35%;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  text-align: center;
+  font-family: "Roboto Condensed";
+  font-size: 14px;
+  background: #000000;
+  color: #ffffff;
+  display: ${(props) => (props.numItems > 0 ? "default" : "none")};
 `;
 const NonDraggableImg = styled.img`
   user-drag: none;
