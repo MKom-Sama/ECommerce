@@ -12,15 +12,31 @@ class App extends Component {
       category: "women", // women || men || kids
       currency: "USD", // USD || GBP || JPY
       cart: [], // { pid , name , prices , quantity , size }
+
+      // Overlay Control
+      visCurrOverlay: false,
+      visCartOverlay: false,
     };
   }
   setCategory = (cat) => this.setState({ category: cat });
   setCurrency = (cur) => this.setState({ currency: cur });
-  // cart functions
+
+  // Overlay Controls
+  togCurrOverlay = () => {
+    this.setState((state) => {
+      return { visCurrOverlay: !state.visCurrOverlay, visCartOverlay: false };
+    });
+  };
+  togCartOverlay = () => {
+    this.setState((state) => {
+      return { visCartOverlay: !state.visCartOverlay, visCurrOverlay: false };
+    });
+  };
+
+  // Cart Functions
   addNewItem = ({ pid, name, prices, size, gallery }) => {
     this.setState((state) => {
       // check for duplicates & removes it
-      console.log("before Filter :", state.cart);
       let newCart = [...state.cart].filter(
         (item) => pid != item.pid || (pid == item.pid && size != item.size)
       );
@@ -34,7 +50,7 @@ class App extends Component {
         size,
         gallery,
       };
-      console.log([...newCart, newItem]);
+
       return { cart: [...newCart, newItem] };
     });
   };
@@ -94,11 +110,17 @@ class App extends Component {
             category={this.state.category}
             setCurrency={this.setCurrency}
             currency={this.state.currency}
+            // Cart
             cart={this.state.cart}
             modifyItemCount={this.modifyItemCount}
             modifyItemSize={this.modifyItemSize}
             getItemCount={this.getItemCount}
             getCartTotalPrice={this.getCartTotalPrice}
+            // Overlay Control
+            visCurrOverlay={this.state.visCurrOverlay}
+            visCartOverlay={this.state.visCartOverlay}
+            togCurrOverlay={this.togCurrOverlay}
+            togCartOverlay={this.togCartOverlay}
           />
           <Routes>
             <Route
@@ -109,6 +131,7 @@ class App extends Component {
                   category={this.state.category}
                   currency={this.state.currency}
                   addNewItem={this.addNewItem}
+                  showOverlay={this.state.visCartOverlay}
                 />
               }
             />

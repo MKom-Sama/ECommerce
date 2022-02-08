@@ -13,9 +13,6 @@ import downIcon from "../assets/svg/down_arrow.svg";
 export default class CurrencyPicker extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      showCurrPicker: false,
-    };
   }
   getSelectedCurrIcon = () => {
     switch (this.props.currency) {
@@ -35,18 +32,14 @@ export default class CurrencyPicker extends Component {
         <StyledIcon
           src={this.getSelectedCurrIcon()}
           alt="currency"
-          onClick={() => {
-            this.setState((state) => ({
-              showCurrPicker: !state.showCurrPicker,
-            }));
-          }}
+          onClick={() => this.props.togCurrOverlay()}
         />
         <NonDraggableImg
-          src={this.state.showCurrPicker ? upIcon : downIcon}
+          src={this.props.visCurrOverlay ? upIcon : downIcon}
           style={{ marginRight: "1.375em" }}
         />
         <DropDownContent
-          visible={this.state.showCurrPicker}
+          visible={this.props.visCurrOverlay}
           className="fade-on-display"
         >
           <CurrencyList>

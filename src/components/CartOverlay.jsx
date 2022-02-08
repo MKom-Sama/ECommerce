@@ -10,9 +10,6 @@ import { getCurrencySymbol } from "../utils";
 export default class CartOverlay extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      showCartOverlay: true,
-    };
   }
 
   render() {
@@ -21,14 +18,10 @@ export default class CartOverlay extends Component {
         <StyledIcon
           src={cartIcon}
           alt="cart-icon"
-          onClick={() => {
-            this.setState((state) => ({
-              showCartOverlay: !state.showCartOverlay,
-            }));
-          }}
+          onClick={() => this.props.togCartOverlay()}
         />
         <DropDownContent
-          visible={this.state.showCartOverlay}
+          visible={this.props.visCartOverlay}
           className="fade-on-display"
         >
           <Text>My Bag,</Text> {this.props.getItemCount()} items

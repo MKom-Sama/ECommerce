@@ -46,6 +46,9 @@ export default class Topbar extends Component {
           <CurrencyPicker
             currency={this.props.currency}
             setCurrency={this.props.setCurrency}
+            // Control
+            visCurrOverlay={this.props.visCurrOverlay}
+            togCurrOverlay={this.props.togCurrOverlay}
           />
           <CartOverlay
             cart={this.props.cart}
@@ -54,6 +57,9 @@ export default class Topbar extends Component {
             modifyItemSize={this.props.modifyItemSize}
             getItemCount={this.props.getItemCount}
             getCartTotalPrice={this.props.getCartTotalPrice}
+            // Control
+            visCartOverlay={this.props.visCartOverlay}
+            togCartOverlay={this.props.togCartOverlay}
           />
         </ButtonGroup>
       </StyledWrapper>
