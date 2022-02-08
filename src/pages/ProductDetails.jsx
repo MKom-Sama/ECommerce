@@ -52,6 +52,7 @@ export default class ProductDetails extends Component {
             selectedSize={this.state.selectedSize}
             product={this.state.product}
             currency={this.props.currency}
+            addNewItem={this.props.addNewItem}
           />
         </StyledDiv>
       </StyledWrapper>

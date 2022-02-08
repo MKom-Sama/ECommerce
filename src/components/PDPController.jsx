@@ -68,7 +68,16 @@ export default class PDPStyledWrapper extends Component {
         <br />
         <br />
         <br />
-        <AddToCartButton className="half-to-full-width">
+        <AddToCartButton
+          className="half-to-full-width"
+          onClick={() =>
+            this.props.addNewItem({
+              ...this.props.product,
+              pid: this.props.product.id,
+              size: this.props.selectedSize,
+            })
+          }
+        >
           ADD TO CART
         </AddToCartButton>
         <ProductDescription

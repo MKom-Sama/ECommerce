@@ -137,7 +137,12 @@ class App extends Component {
             />
             <Route
               path="/product/:id"
-              element={<ProductDetails currency={this.state.currency} />}
+              element={
+                <ProductDetails
+                  currency={this.state.currency}
+                  addNewItem={this.addNewItem}
+                />
+              }
             />
           </Routes>
         </BrowserRouter>
