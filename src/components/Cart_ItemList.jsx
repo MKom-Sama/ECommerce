@@ -8,10 +8,6 @@ export default class Cart_ItemList extends Component {
   constructor(props) {
     super(props);
   }
-  componentDidMount() {
-    console.log(this.props.cart);
-    // console.log(this.props.currency);
-  }
   render() {
     return (
       <StyledWrapper>
@@ -24,7 +20,7 @@ export default class Cart_ItemList extends Component {
                   {getCurrencySymbol(this.props.currency)}
                   {
                     item.prices.filter(
-                      (price) => price.currency.label == this.props.currency
+                      (price) => price.currency.label === this.props.currency
                     )[0].amount
                   }
                 </h2>
@@ -94,6 +90,7 @@ export default class Cart_ItemList extends Component {
                     minHeight: "185px",
                     // resize: "cover",
                   }}
+                  className="non-drag"
                   src={item.gallery[0]}
                 />
               </Right>
@@ -117,7 +114,6 @@ const CartItem = styled.li`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  ${"" /* border: 2px solid black; */}
   margin: 10px;
   padding: 12px;
 `;
@@ -140,7 +136,7 @@ const Box = styled.button`
   all: unset;
   width: 63px;
   height: 45px;
-  border: 2px solid black;
+  border: 1px solid black;
   margin: 5px;
   text-align: center;
   font-family: Source Sans Pro;

@@ -1,5 +1,5 @@
-import react, { Component } from "react";
-import { BrowserRouter, Link, Route, Routes, Navigate } from "react-router-dom";
+import { Component } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import ProductList from "./pages/ProductList";
 import ProductDetails from "./pages/ProductDetails";

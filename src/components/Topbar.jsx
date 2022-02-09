@@ -40,7 +40,7 @@ export default class Topbar extends Component {
         </ButtonGroup>
 
         {/* LOGO */}
-        <NonDraggableImg src={appLogo} alt="logo" />
+        <img className="non-drag" src={appLogo} alt="logo" />
 
         <ButtonGroup>
           <CurrencyPicker
@@ -91,7 +91,7 @@ const StyledWrapper = styled.div`
 `;
 const StyledButton = styled.button`
   all: unset;
-  font-family: Raleway;
+  ${'' /* font-family: Raleway; */}
   font-weight: 600;
   font-size: 18px;
   color: #5ece7b;
@@ -108,10 +108,11 @@ const StyledButton = styled.button`
 `;
 const Badge = styled.div`
   position: absolute;
-  right: 6.4%;
+  right: 6.3%;
   top: 35%;
   width: 20px;
   height: 20px;
+  padding:2px;
   border-radius: 100%;
   text-align: center;
   font-family: "Roboto Condensed";
@@ -120,17 +121,6 @@ const Badge = styled.div`
   color: #ffffff;
   display: ${(props) => (props.numItems > 0 ? "default" : "none")};
 `;
-const NonDraggableImg = styled.img`
-  user-drag: none;
-  -webkit-user-select: none; /* Safari, Chrome */
-  -webkit-user-drag: none;
-  -khtml-user-select: none; /* Konqueror */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* IE */
-  user-select: none; /* CSS3 */
-`;
-const StyledIcon = styled(NonDraggableImg)``;
-
 const ButtonGroup = styled.div`
   align-self: center;
 `;

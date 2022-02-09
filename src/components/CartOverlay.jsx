@@ -54,9 +54,15 @@ export default class CartOverlay extends Component {
               bottom: "3.70%",
             }}
           >
-            <Link to="/cart">
-              <ViewBag>VIEW BAG</ViewBag>
-            </Link>
+            <ViewBag>
+              <Link
+                to="/cart"
+                style={{ textDecoration: "none", color: "#1D1F22" }}
+              >
+                VIEW BAG
+              </Link>
+            </ViewBag>
+
             <CheckoutButton>CHECKOUT</CheckoutButton>
           </div>
         </DropDownContent>
