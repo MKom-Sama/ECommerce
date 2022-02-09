@@ -6,6 +6,7 @@ import cartIcon from "../assets/svg/cart.svg";
 import CO_ItemList from "./CO_ItemList";
 
 import { getCurrencySymbol } from "../utils";
+import { Link } from "react-router-dom";
 
 export default class CartOverlay extends Component {
   constructor(props) {
@@ -53,7 +54,9 @@ export default class CartOverlay extends Component {
               bottom: "3.70%",
             }}
           >
-            <ViewBag>VIEW BAG</ViewBag>
+            <Link to="/cart">
+              <ViewBag>VIEW BAG</ViewBag>
+            </Link>
             <CheckoutButton>CHECKOUT</CheckoutButton>
           </div>
         </DropDownContent>

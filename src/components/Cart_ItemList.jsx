@@ -1,35 +1,33 @@
 import React, { Component } from "react";
+
 import styled, { css } from "styled-components";
 
 import { getCurrencySymbol } from "../utils";
-export default class CO_ItemList extends Component {
+
+export default class Cart_ItemList extends Component {
   constructor(props) {
     super(props);
   }
-
+  componentDidMount() {
+    console.log(this.props.cart);
+    // console.log(this.props.currency);
+  }
   render() {
     return (
       <StyledWrapper>
         <CartList>
           {this.props.cart.map((item) => (
             <CartItem key={item.pid}>
-              <div
-                style={{
-                  display: "flex",
-                  flex: 3,
-                  flexDirection: "column",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Text style={{ fontWeight: 500 }}>{item.name}</Text>
-                <Text style={{ fontWeight: 900 }}>
+              <Left>
+                <Text>{item.name}</Text>
+                <h2 style={{ fontWeight: 900 }}>
                   {getCurrencySymbol(this.props.currency)}
                   {
                     item.prices.filter(
                       (price) => price.currency.label == this.props.currency
                     )[0].amount
                   }
-                </Text>
+                </h2>
                 <Sizes>
                   <Box
                     name="xsm"
@@ -60,36 +58,45 @@ export default class CO_ItemList extends Component {
                     L
                   </Box>
                 </Sizes>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  flex: 1,
-                  flexDirection: "column",
-                  justifyContent: "space-between",
-                  textAlign: "center",
-                }}
-              >
-                <Box
-                  name="plus"
-                  style={{ alignSelf: "center" }}
-                  onClick={() => this.props.modifyItemCount(item.pid, 1)}
+              </Left>
+              <Right>
+                <div
+                  style={{
+                    display: "flex",
+                    flex: 1,
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                    textAlign: "center",
+                  }}
                 >
-                  +
-                </Box>
-                <span>{item.quantity}</span>
-                <Box
-                  name="minus"
-                  style={{ alignSelf: "center" }}
-                  onClick={() => this.props.modifyItemCount(item.pid, -1)}
-                >
-                  -
-                </Box>
-              </div>
-              <img
-                style={{ flex: 2, maxWidth: "105px", maxHeight: "137px" }}
-                src={item.gallery[0]}
-              />
+                  <Box
+                    name="plus"
+                    style={{ alignSelf: "center" }}
+                    onClick={() => this.props.modifyItemCount(item.pid, 1)}
+                  >
+                    +
+                  </Box>
+                  <span>{item.quantity}</span>
+                  <Box
+                    name="minus"
+                    style={{ alignSelf: "center" }}
+                    onClick={() => this.props.modifyItemCount(item.pid, -1)}
+                  >
+                    -
+                  </Box>
+                </div>
+                <img
+                  style={{
+                    flex: 4,
+                    maxWidth: "141px",
+                    maxHeight: "185px",
+                    minWidth: "141px",
+                    minHeight: "185px",
+                    // resize: "cover",
+                  }}
+                  src={item.gallery[0]}
+                />
+              </Right>
             </CartItem>
           ))}
         </CartList>
@@ -97,44 +104,44 @@ export default class CO_ItemList extends Component {
     );
   }
 }
-
-// Styles
 const StyledWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-self: center;
-  overflow: scroll;
-  max-height: 400px;
-  min-height: 400px;
+  height: 100%;
+  padding-right: 16.8%;
 `;
 const CartList = styled.ul`
   list-style: none;
   padding: 0;
 `;
+
 const CartItem = styled.li`
   display: flex;
   flex-direction: row;
-  padding: 8px;
-  margin-bottom: 5px;
-  background: #fafafa;
-  border-radius: 5px;
+  justify-content: space-between;
+  ${"" /* border: 2px solid black; */}
+  margin: 10px;
+  padding: 12px;
+`;
+
+const Left = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+const Right = styled.div`
+  display: flex;
+  flex-direction: row;
 `;
 const Sizes = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 80%;
-`;
-const Text = styled.span`
-  font-style: normal;
-  font-size: 16px;
-  color: #1d1f22;
+  width: 60%;
 `;
 const Box = styled.button`
   all: unset;
-  width: 24px;
-  height: 24px;
+  width: 63px;
+  height: 45px;
   border: 2px solid black;
+  margin: 5px;
   text-align: center;
   font-family: Source Sans Pro;
   font-style: normal;
@@ -154,4 +161,9 @@ const Box = styled.button`
   &:hover {
     background-color: #d7dee3;
   }
+`;
+const Text = styled.span`
+  font-style: normal;
+  font-size: 26px;
+  color: #1d1f22;
 `;

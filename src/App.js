@@ -4,6 +4,7 @@ import { BrowserRouter, Link, Route, Routes, Navigate } from "react-router-dom";
 import ProductList from "./pages/ProductList";
 import ProductDetails from "./pages/ProductDetails";
 import Topbar from "./components/Topbar";
+import Cart from "./pages/Cart";
 
 class App extends Component {
   constructor(props) {
@@ -141,6 +142,17 @@ class App extends Component {
                 <ProductDetails
                   currency={this.state.currency}
                   addNewItem={this.addNewItem}
+                />
+              }
+            />
+            <Route
+              path="/cart"
+              element={
+                <Cart
+                  cart={this.state.cart}
+                  currency={this.state.currency}
+                  modifyItemCount={this.modifyItemCount}
+                  modifyItemSize={this.modifyItemSize}
                 />
               }
             />
