@@ -87,7 +87,7 @@ const StyledWrapper = styled.div`
   justify-content: space-between;
   align-content: center;
   background-color: #ffffff;
-  z-index: 1;
+  z-index: 2;
 `;
 const StyledButton = styled.button`
   all: unset;

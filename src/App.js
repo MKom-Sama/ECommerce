@@ -5,6 +5,7 @@ import ProductList from "./pages/ProductList";
 import ProductDetails from "./pages/ProductDetails";
 import Topbar from "./components/Topbar";
 import Cart from "./pages/Cart";
+import styled from "styled-components";
 
 class App extends Component {
   constructor(props) {
@@ -121,6 +122,7 @@ class App extends Component {
             togCurrOverlay={this.togCurrOverlay}
             togCartOverlay={this.togCartOverlay}
           />
+          <OverlayBackdrop visible={this.state.visCartOverlay} />
           <Routes>
             <Route
               exact
@@ -130,7 +132,6 @@ class App extends Component {
                   category={this.state.category}
                   currency={this.state.currency}
                   addNewItem={this.addNewItem}
-                  showOverlay={this.state.visCartOverlay}
                 />
               }
             />
@@ -160,5 +161,15 @@ class App extends Component {
     );
   }
 }
+const OverlayBackdrop = styled.div`
+  background: #39374838;
+  position: fixed;
+  top: 10.69%;
+  right: 0%;
+  left: 0%;
+  bottom: 0%;
+  z-index: 1;
+  display: ${(props) => (props.visible ? "block" : "none")};
+`;
 
 export default App;

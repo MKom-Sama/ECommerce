@@ -21,7 +21,7 @@ export default class ProductList extends Component {
   }
   render() {
     return (
-      <StyledWrapper showOverlay={this.props.showOverlay}>
+      <StyledWrapper>
         <span style={{ fontSize: "2em" }}>
           {this.props.category.toUpperCase()}
         </span>
@@ -78,7 +78,6 @@ export default class ProductList extends Component {
 // Styles
 const StyledWrapper = styled.div`
   padding: 2% 7.013% 0% 8.125%;
-  background:${props=>props.showOverlay?'rgba(57, 55, 72, 0.22)':'#ffffff'} ;
 `;
 
 const Grid = styled.div`

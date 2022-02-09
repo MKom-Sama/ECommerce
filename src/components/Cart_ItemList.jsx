@@ -147,9 +147,9 @@ const Box = styled.button`
     props.name === props.selectedSize
       ? css`
           cursor: default;
-          background: #d7dee3;
-          color: #000000;
-          border: 2px solid #d7dee3;
+          background: #000000;
+          color: #ffffff;
+          border: 2px solid #1D1F22;
         `
       : css`
           cursor: pointer;

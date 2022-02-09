@@ -18,6 +18,7 @@ export default class CartOverlay extends Component {
       <>
         <StyledIcon
           src={cartIcon}
+          className="non-drag"
           alt="cart-icon"
           onClick={() => this.props.togCartOverlay()}
         />
@@ -80,7 +81,7 @@ const NonDraggableImg = styled.img`
   -ms-user-select: none; /* IE */
   user-select: none; /* CSS3 */
 `;
-const StyledIcon = styled(NonDraggableImg)`
+const StyledIcon = styled.img`
   cursor: pointer;
 `;
 
@@ -92,7 +93,7 @@ const DropDownContent = styled.div`
   top: 9.125%;
   padding: 1%;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
+  z-index: 2;
   max-height: 540px;
   min-height: 540px;
   max-width: 325px;
