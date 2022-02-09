@@ -38,9 +38,7 @@ class App extends Component {
   addNewItem = ({ pid, name, prices, size, gallery }) => {
     this.setState((state) => {
       // check for duplicates & removes it
-      let newCart = [...state.cart].filter(
-        (item) => pid != item.pid || (pid == item.pid && size != item.size)
-      );
+      let newCart = [...state.cart].filter((item) => pid != item.pid);
 
       // resets the quantity on duplicate entries
       let newItem = {
