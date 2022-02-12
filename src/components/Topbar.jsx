@@ -18,6 +18,7 @@ export default class Topbar extends Component {
         <ButtonGroup>
           {this.props.categories.map((category) => (
             <StyledButton
+              key={category}
               onClick={() => this.props.setCategory(category)}
               btnSelects={category}
               selectedCat={this.props.category}

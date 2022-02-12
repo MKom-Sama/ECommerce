@@ -18,7 +18,6 @@ export default class ProductList extends Component {
   }
   componentDidMount() {
     getProducts().then((result) => this.setState({ products: result }));
-    console.log('mounter')
   }
   render() {
     return (
@@ -27,49 +26,53 @@ export default class ProductList extends Component {
           {this.props.category.toUpperCase()}
         </span>
         <Grid>
-          {this.state.products.map((product) => (
-            <ProductItem key={product.id}>
-              <Link
-                style={{
-                  all: "initial",
-                  display: "flex",
-                  flexDirection: "column",
-                  flex: 1,
-                  maxHeight: "80%",
-                }}
-                to={`/product/${product.id}`}
-              >
-                <ProductImg src={product.gallery[0]} />
-              </Link>
-              <AddToCartButton
-                onClick={() =>
-                  this.props.addNewItem({
-                    pid: product.id,
-                    name: product.name,
-                    prices: product.prices,
-                    size: "xsm",
-                    gallery: product.gallery,
-                  })
-                }
-              >
-                <CartIcon src={cartIcon} />
-              </AddToCartButton>
-              <Link
-                style={{ all: "initial", cursor: "pointer" }}
-                to={`/product/${product.id}`}
-              >
-                <span style={{ fontSize: "1.4em" }}>{product.name}</span>
-              </Link>
-              <span style={{ fontSize: "1.2em", marginTop: 8 }}>
-                <strong>{getCurrencySymbol(this.props.currency)}</strong>
-                {
-                  product.prices.filter(
-                    (price) => price.currency.label == this.props.currency
-                  )[0].amount
-                }
-              </span>
-            </ProductItem>
-          ))}
+          {this.state.products.map(
+            (product) =>
+              (product.category == this.props.category ||
+                this.props.category == "all") && (
+                <ProductItem key={product.id}>
+                  <Link
+                    style={{
+                      all: "initial",
+                      display: "flex",
+                      flexDirection: "column",
+                      flex: 1,
+                      maxHeight: "80%",
+                    }}
+                    to={`/product/${product.id}`}
+                  >
+                    <ProductImg src={product.gallery[0]} />
+                  </Link>
+                  <AddToCartButton
+                    onClick={() =>
+                      this.props.addNewItem({
+                        pid: product.id,
+                        name: product.name,
+                        prices: product.prices,
+                        size: "xsm",
+                        gallery: product.gallery,
+                      })
+                    }
+                  >
+                    <CartIcon src={cartIcon} />
+                  </AddToCartButton>
+                  <Link
+                    style={{ all: "initial", cursor: "pointer" }}
+                    to={`/product/${product.id}`}
+                  >
+                    <span style={{ fontSize: "1.4em" }}>{product.name}</span>
+                  </Link>
+                  <span style={{ fontSize: "1.2em", marginTop: 8 }}>
+                    <strong>{getCurrencySymbol(this.props.currency)}</strong>
+                    {
+                      product.prices.filter(
+                        (price) => price.currency.label == this.props.currency
+                      )[0].amount
+                    }
+                  </span>
+                </ProductItem>
+              )
+          )}
         </Grid>
       </StyledWrapper>
     );

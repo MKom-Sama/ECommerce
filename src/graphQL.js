@@ -14,7 +14,7 @@ const getProducts = async () => {
         category {
           products {
             id
-            # category,
+            category
             name
             gallery
             prices {
@@ -28,6 +28,7 @@ const getProducts = async () => {
       }
     `,
   });
+  console.log(data.category.products);
   return data.category.products;
 };
 

@@ -15,8 +15,8 @@ class App extends Component {
       categories: [],
       currencies: [],
 
-      category: "women", // women || men || kids
-      currency: "USD", // USD || GBP || JPY
+      category: "women", // all || tech || clothes ( selected cat)
+      currency: "USD", // USD || GBP || JPY || AUD || RUB (selected curr)
       cart: [], // { pid , name , prices , quantity , size }
 
       // Overlay Control
@@ -27,8 +27,12 @@ class App extends Component {
 
   componentDidMount() {
     // Fetching from GQL API
-    getAllCategories().then((res) => this.setState({ categories: res }));
-    getAllCurrencies().then((res) => this.setState({ currencies: res }));
+    getAllCategories().then((res) =>
+      this.setState({ categories: res, category: res[0] })
+    );
+    getAllCurrencies().then((res) =>
+      this.setState({ currencies: res, currency: res[0] })
+    );
   }
 
   setCategory = (cat) => this.setState({ category: cat });
