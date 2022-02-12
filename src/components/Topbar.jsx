@@ -16,27 +16,15 @@ export default class Topbar extends Component {
     return (
       <StyledWrapper>
         <ButtonGroup>
-          <StyledButton
-            onClick={() => this.props.setCategory("women")}
-            btnSelects="women"
-            selectedCat={this.props.category}
-          >
-            WOMEN
-          </StyledButton>
-          <StyledButton
-            onClick={() => this.props.setCategory("men")}
-            btnSelects="men"
-            selectedCat={this.props.category}
-          >
-            MEN
-          </StyledButton>
-          <StyledButton
-            onClick={() => this.props.setCategory("kids")}
-            btnSelects="kids"
-            selectedCat={this.props.category}
-          >
-            KIDS
-          </StyledButton>
+          {this.props.categories.map((category) => (
+            <StyledButton
+              onClick={() => this.props.setCategory(category)}
+              btnSelects={category}
+              selectedCat={this.props.category}
+            >
+              {category.toUpperCase()}
+            </StyledButton>
+          ))}
         </ButtonGroup>
 
         {/* LOGO */}
@@ -46,6 +34,7 @@ export default class Topbar extends Component {
           <CurrencyPicker
             currency={this.props.currency}
             setCurrency={this.props.setCurrency}
+            currencies={this.props.currencies}
             // Control
             visCurrOverlay={this.props.visCurrOverlay}
             togCurrOverlay={this.props.togCurrOverlay}
@@ -91,7 +80,7 @@ const StyledWrapper = styled.div`
 `;
 const StyledButton = styled.button`
   all: unset;
-  ${'' /* font-family: Raleway; */}
+  ${"" /* font-family: Raleway; */}
   font-weight: 600;
   font-size: 18px;
   color: #5ece7b;
@@ -112,7 +101,7 @@ const Badge = styled.div`
   top: 35%;
   width: 20px;
   height: 20px;
-  padding:2px;
+  padding: 2px;
   border-radius: 100%;
   text-align: center;
   font-family: "Roboto Condensed";

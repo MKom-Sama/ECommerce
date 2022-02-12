@@ -18,6 +18,7 @@ export default class ProductList extends Component {
   }
   componentDidMount() {
     getProducts().then((result) => this.setState({ products: result }));
+    console.log('mounter')
   }
   render() {
     return (

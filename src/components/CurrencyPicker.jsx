@@ -2,10 +2,12 @@ import React, { Component } from "react";
 
 import styled from "styled-components";
 
-// Currencies
-import USDIcon from "../assets/svg/USD.svg";
-import GBPIcon from "../assets/svg/GBP.svg";
-import JPYIcon from "../assets/svg/JPY.svg";
+// Currency Icons
+import USDIcon from "../assets/svg/currIcons/USD.svg";
+import GBPIcon from "../assets/svg/currIcons/GBP.svg";
+import JPYIcon from "../assets/svg/currIcons/JPY.svg";
+import RUBIcon from "../assets/svg/currIcons/RUB.svg";
+import A$Icon from "../assets/svg/currIcons/A$.svg";
 
 import upIcon from "../assets/svg/up_arrow.svg";
 import downIcon from "../assets/svg/down_arrow.svg";
@@ -14,14 +16,18 @@ export default class CurrencyPicker extends Component {
   constructor(props) {
     super(props);
   }
-  getSelectedCurrIcon = () => {
-    switch (this.props.currency) {
+  getCurrIcon = (currName) => {
+    switch (currName) {
       case "USD":
         return USDIcon;
       case "GBP":
         return GBPIcon;
       case "JPY":
         return JPYIcon;
+      case "RUB":
+        return RUBIcon;
+      case "AUD":
+        return A$Icon;
       default:
         break;
     }
@@ -30,7 +36,7 @@ export default class CurrencyPicker extends Component {
     return (
       <>
         <StyledIcon
-          src={this.getSelectedCurrIcon()}
+          src={this.getCurrIcon(this.props.currency)}
           alt="currency"
           onClick={() => this.props.togCurrOverlay()}
         />
@@ -43,18 +49,12 @@ export default class CurrencyPicker extends Component {
           className="fade-on-display"
         >
           <CurrencyList>
-            <Styledli onClick={() => this.props.setCurrency("USD")}>
-              <StyledIcon src={USDIcon} />
-              USD
-            </Styledli>
-            <Styledli onClick={() => this.props.setCurrency("GBP")}>
-              <StyledIcon src={GBPIcon} />
-              EUR
-            </Styledli>
-            <Styledli onClick={() => this.props.setCurrency("JPY")}>
-              <StyledIcon src={JPYIcon} />
-              JPY
-            </Styledli>
+            {this.props.currencies.map((curr) => (
+              <Styledli onClick={() => this.props.setCurrency(curr)}>
+                <StyledIcon src={this.getCurrIcon(curr)} />
+                {curr}
+              </Styledli>
+            ))}
           </CurrencyList>
         </DropDownContent>
       </>
@@ -78,7 +78,6 @@ const DropDownContent = styled.div`
   position: fixed;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
-  height: 140px;
   width: 114px;
   border-radius: 5px;
   display: ${(props) => (props.visible ? "block" : "none")};

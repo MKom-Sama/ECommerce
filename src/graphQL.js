@@ -1,8 +1,4 @@
-import {
-  ApolloClient,
-  InMemoryCache,
-  gql,
-} from "@apollo/client";
+import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 
 const client = new ApolloClient({
   uri: "http://localhost:4000/",
@@ -61,4 +57,30 @@ const getProductByID = async (p_id) => {
   return data.product;
 };
 
-export { getProducts, getProductByID };
+const getAllCategories = async () => {
+  let { data } = await client.query({
+    query: gql`
+      query getAllCategories {
+        categories {
+          name
+        }
+      }
+    `,
+  });
+  return data.categories.map((item) => item.name);
+};
+
+const getAllCurrencies = async () => {
+  let { data } = await client.query({
+    query: gql`
+      query getAllCurrencies {
+        currencies {
+          label
+        }
+      }
+    `,
+  });
+  return data.currencies.map((item) => item.label);
+};
+
+export { getProducts, getProductByID, getAllCategories, getAllCurrencies };

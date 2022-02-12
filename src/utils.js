@@ -1,5 +1,4 @@
 const getCurrencySymbol = (curr) => {
-
   switch (curr) {
     case "USD":
       return "$";
@@ -7,6 +6,10 @@ const getCurrencySymbol = (curr) => {
       return "£";
     case "JPY":
       return "¥";
+    case "RUB":
+      return "₽";
+    case "AUD":
+      return "A$";
     default:
       break;
   }

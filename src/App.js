@@ -6,11 +6,15 @@ import ProductDetails from "./pages/ProductDetails";
 import Topbar from "./components/Topbar";
 import Cart from "./pages/Cart";
 import styled from "styled-components";
+import { getAllCategories, getAllCurrencies } from "./graphQL";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      categories: [],
+      currencies: [],
+
       category: "women", // women || men || kids
       currency: "USD", // USD || GBP || JPY
       cart: [], // { pid , name , prices , quantity , size }
@@ -20,6 +24,13 @@ class App extends Component {
       visCartOverlay: false,
     };
   }
+
+  componentDidMount() {
+    // Fetching from GQL API
+    getAllCategories().then((res) => this.setState({ categories: res }));
+    getAllCurrencies().then((res) => this.setState({ currencies: res }));
+  }
+
   setCategory = (cat) => this.setState({ category: cat });
   setCurrency = (cur) => this.setState({ currency: cur });
 
@@ -110,6 +121,9 @@ class App extends Component {
             category={this.state.category}
             setCurrency={this.setCurrency}
             currency={this.state.currency}
+            // From GQL
+            categories={this.state.categories}
+            currencies={this.state.currencies}
             // Cart
             cart={this.state.cart}
             modifyItemCount={this.modifyItemCount}
