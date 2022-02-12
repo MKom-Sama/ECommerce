@@ -13,9 +13,27 @@ export default class CartOverlay extends Component {
     super(props);
   }
 
+  myRef = React.createRef();
+  handleClickOutCartOverlay = (e) => {
+    if (!this.myRef.current.contains(e.target)) {
+      this.props.closeOverlay();
+    }
+  };
+
+  componentDidUpdate() {
+    if (this.props.visCartOverlay) {
+      document.addEventListener("click", this.handleClickOutCartOverlay, true);
+    } else {
+      document.removeEventListener(
+        "click",
+        this.handleClickOutCartOverlay,
+        true
+      );
+    }
+  }
   render() {
     return (
-      <>
+      <span ref={this.myRef}>
         <StyledIcon
           src={cartIcon}
           className="non-drag"
@@ -25,6 +43,7 @@ export default class CartOverlay extends Component {
         <DropDownContent
           visible={this.props.visCartOverlay}
           className="fade-on-display"
+          ref={this.myRef}
         >
           <Text>My Bag,</Text> {this.props.getItemCount()} items
           <br />
@@ -67,7 +86,7 @@ export default class CartOverlay extends Component {
             <CheckoutButton>CHECKOUT</CheckoutButton>
           </div>
         </DropDownContent>
-      </>
+      </span>
     );
   }
 }

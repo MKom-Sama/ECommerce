@@ -49,6 +49,9 @@ class App extends Component {
       return { visCartOverlay: !state.visCartOverlay, visCurrOverlay: false };
     });
   };
+  closeOverlay = () => {
+    this.setState({ visCartOverlay: false, visCurrOverlay: false });
+  };
 
   // Cart Functions
   addNewItem = ({ pid, name, prices, size, gallery }) => {
@@ -139,6 +142,7 @@ class App extends Component {
             visCartOverlay={this.state.visCartOverlay}
             togCurrOverlay={this.togCurrOverlay}
             togCartOverlay={this.togCartOverlay}
+            closeOverlay={this.closeOverlay}
           />
           <OverlayBackdrop visible={this.state.visCartOverlay} />
           <Routes>

@@ -32,9 +32,29 @@ export default class CurrencyPicker extends Component {
         break;
     }
   };
+
+  myRef = React.createRef();
+  handleClickOutCurrOverlay = (e) => {
+    if (!this.myRef.current.contains(e.target)) {
+      this.props.closeOverlay();
+    }
+  };
+
+  componentDidUpdate() {
+    if (this.props.visCurrOverlay) {
+      document.addEventListener("click", this.handleClickOutCurrOverlay, true);
+    } else {
+      document.removeEventListener(
+        "click",
+        this.handleClickOutCurrOverlay,
+        true
+      );
+    }
+  }
+
   render() {
     return (
-      <>
+      <span ref={this.myRef}>
         <StyledIcon
           src={this.getCurrIcon(this.props.currency)}
           alt="currency"
@@ -57,7 +77,7 @@ export default class CurrencyPicker extends Component {
             ))}
           </CurrencyList>
         </DropDownContent>
-      </>
+      </span>
     );
   }
 }

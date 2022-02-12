@@ -39,6 +39,7 @@ export default class Topbar extends Component {
             // Control
             visCurrOverlay={this.props.visCurrOverlay}
             togCurrOverlay={this.props.togCurrOverlay}
+            closeOverlay={this.props.closeOverlay}
           />
           <CartOverlay
             cart={this.props.cart}
@@ -50,6 +51,7 @@ export default class Topbar extends Component {
             // Control
             visCartOverlay={this.props.visCartOverlay}
             togCartOverlay={this.props.togCartOverlay}
+            closeOverlay={this.props.closeOverlay}
           />
           <Badge
             numItems={this.props.getItemCount()}
