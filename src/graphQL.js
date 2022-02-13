@@ -28,7 +28,6 @@ const getProducts = async () => {
       }
     `,
   });
-  console.log(data.category.products);
   return data.category.products;
 };
 

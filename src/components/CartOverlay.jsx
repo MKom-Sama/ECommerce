@@ -91,15 +91,6 @@ export default class CartOverlay extends Component {
   }
 }
 // Styles
-const NonDraggableImg = styled.img`
-  user-drag: none;
-  -webkit-user-select: none; /* Safari, Chrome */
-  -webkit-user-drag: none;
-  -khtml-user-select: none; /* Konqueror */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* IE */
-  user-select: none; /* CSS3 */
-`;
 const StyledIcon = styled.img`
   cursor: pointer;
 `;

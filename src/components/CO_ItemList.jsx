@@ -12,7 +12,7 @@ export default class CO_ItemList extends Component {
       <StyledWrapper>
         <CartList>
           {this.props.cart.map((item) => (
-            <CartItem key={item.pid}>
+            <CartItem key={item.id}>
               <div
                 style={{
                   display: "flex",
@@ -34,28 +34,28 @@ export default class CO_ItemList extends Component {
                   <Box
                     name="xsm"
                     selectedSize={item.size}
-                    onClick={() => this.props.modifyItemSize(item.pid, "xsm")}
+                    onClick={() => this.props.modifyItemSize(item.id, "xsm")}
                   >
                     XS
                   </Box>
                   <Box
                     name="sm"
                     selectedSize={item.size}
-                    onClick={() => this.props.modifyItemSize(item.pid, "sm")}
+                    onClick={() => this.props.modifyItemSize(item.id, "sm")}
                   >
                     S
                   </Box>
                   <Box
                     name="md"
                     selectedSize={item.size}
-                    onClick={() => this.props.modifyItemSize(item.pid, "md")}
+                    onClick={() => this.props.modifyItemSize(item.id, "md")}
                   >
                     M
                   </Box>
                   <Box
                     name="lrg"
                     selectedSize={item.size}
-                    onClick={() => this.props.modifyItemSize(item.pid, "lrg")}
+                    onClick={() => this.props.modifyItemSize(item.id, "lrg")}
                   >
                     L
                   </Box>
@@ -73,7 +73,7 @@ export default class CO_ItemList extends Component {
                 <Box
                   name="plus"
                   style={{ alignSelf: "center" }}
-                  onClick={() => this.props.modifyItemCount(item.pid, 1)}
+                  onClick={() => this.props.modifyItemCount(item.id, 1)}
                 >
                   +
                 </Box>
@@ -81,7 +81,7 @@ export default class CO_ItemList extends Component {
                 <Box
                   name="minus"
                   style={{ alignSelf: "center" }}
-                  onClick={() => this.props.modifyItemCount(item.pid, -1)}
+                  onClick={() => this.props.modifyItemCount(item.id, -1)}
                 >
                   -
                 </Box>

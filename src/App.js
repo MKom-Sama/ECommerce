@@ -17,7 +17,7 @@ class App extends Component {
 
       category: "women", // all || tech || clothes ( selected cat)
       currency: "USD", // USD || GBP || JPY || AUD || RUB (selected curr)
-      cart: [], // { pid , name , prices , quantity , size }
+      cart: [], // { id , name , prices , quantity , size , gallery }
 
       // Overlay Control
       visCurrOverlay: false,
@@ -54,49 +54,94 @@ class App extends Component {
   };
 
   // Cart Functions
-  addNewItem = ({ pid, name, prices, size, gallery }) => {
+  addNewItem = (product, size, quantity) => {
     this.setState((state) => {
-      // check for duplicates & removes it
-      let newCart = [...state.cart].filter((item) => pid != item.pid);
-
-      // resets the quantity on duplicate entries
-      let newItem = {
-        pid,
-        name,
-        prices,
-        quantity: 1,
+      let item = {
+        id: `${product.id}+_${size}`,
+        name: product.name,
+        prices: product.prices,
+        quantity,
         size,
-        gallery,
+        gallery: product.gallery,
       };
+      // Cart Empty
+      if (state.cart.length === 0) {
+        return { cart: [item] };
+      }
+      // Item Same ID in Cart
+      // Item Same ID not in Cart
+      let newCart = [];
+      let isNew = true;
+      state.cart.forEach((elem) => {
+        let newQuantity = elem.quantity;
+        if (elem.id === item.id) {
+          newQuantity = elem.quantity + item.quantity;
+          isNew = false;
+        }
+        newCart.push({
+          id: elem.id,
+          name: elem.name,
+          prices: product.prices,
+          quantity: newQuantity,
+          size: elem.size,
+          gallery: elem.gallery,
+        });
+      });
 
-      return { cart: [...newCart, newItem] };
+      if (isNew) {
+        return { cart: [...newCart, item] };
+      }
+      return { cart: [...newCart] };
     });
   };
-  modifyItemCount = (pid, val) => {
+  modifyItemCount = (id, val) => {
     this.setState((state) => {
       let newCart = [];
       state.cart.forEach((item) => {
-        if (item.pid === pid) {
-          item.quantity += 0.5 * val; // idk why 0.5 too but it works
+        let newQuantity = item.quantity;
+        if (item.id === id) {
+          newQuantity += val;
         }
-
-        if (item.quantity >= 1) {
-          newCart.push(item);
+        if (newQuantity >= 1) {
+          newCart.push({
+            id: item.id,
+            name: item.name,
+            prices: item.prices,
+            quantity: newQuantity,
+            size: item.size,
+            gallery: item.gallery,
+          });
         }
       });
       return { cart: newCart };
     });
   };
-  modifyItemSize = (pid, newSize) => {
+  modifyItemSize = (id, newSize) => {
     this.setState((state) => {
       let newCart = [];
+      // Find and Modify Item
       state.cart.forEach((item) => {
-        if (item.pid === pid) {
+        let tempQuantity = item.quantity;
+        if (item.id === id) {
           item.size = newSize;
+          item.id = item.id.split("+_")[0] + "+_" + newSize;
         }
-        newCart.push(item);
+        // Check if item with same id already exists
+        let idx = newCart.findIndex((c_item) => c_item.id == item.id);
+        console.log(idx);
+        if (idx !== -1) {
+          newCart[idx].quantity += tempQuantity;
+        } else {
+          newCart.push({
+            id: item.id,
+            name: item.name,
+            prices: item.prices,
+            quantity: tempQuantity,
+            size: item.size,
+            gallery: item.gallery,
+          });
+        }
       });
-
       return { cart: newCart };
     });
   };

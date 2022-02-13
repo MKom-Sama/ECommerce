@@ -44,15 +44,7 @@ export default class ProductList extends Component {
                     <ProductImg src={product.gallery[0]} />
                   </Link>
                   <AddToCartButton
-                    onClick={() =>
-                      this.props.addNewItem({
-                        pid: product.id,
-                        name: product.name,
-                        prices: product.prices,
-                        size: "xsm",
-                        gallery: product.gallery,
-                      })
-                    }
+                    onClick={() => this.props.addNewItem(product, "xsm", 1)}
                   >
                     <CartIcon src={cartIcon} />
                   </AddToCartButton>
