@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import { Link, Navigate } from "react-router-dom";
 
 // Icons
 import appLogo from "../assets/svg/a-logo.svg";
@@ -17,14 +18,16 @@ export default class Topbar extends Component {
       <StyledWrapper>
         <ButtonGroup>
           {this.props.categories.map((category) => (
-            <StyledButton
-              key={category}
-              onClick={() => this.props.setCategory(category)}
-              btnSelects={category}
-              selectedCat={this.props.category}
-            >
-              {category.toUpperCase()}
-            </StyledButton>
+            <Link to="/" style={{ textDecoration: 'none', cursor:'pointer'}}>
+              <StyledButton
+                key={category}
+                onClick={() => this.props.setCategory(category)}
+                btnSelects={category}
+                selectedCat={this.props.category}
+              >
+                {category.toUpperCase()}
+              </StyledButton>
+            </Link>
           ))}
         </ButtonGroup>
 
