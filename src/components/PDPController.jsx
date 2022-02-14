@@ -1,22 +1,11 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import ProductList from "../pages/ProductList";
+
+import { getCurrencySymbol } from "../utils";
 
 export default class PDPStyledWrapper extends Component {
   constructor(props) {
     super(props);
-  }
-  getCurrencySymbol(curr) {
-    switch (curr) {
-      case "USD":
-        return "$";
-      case "GBP":
-        return "£";
-      case "JPY":
-        return "¥";
-      default:
-        break;
-    }
   }
   render() {
     return (
@@ -58,11 +47,11 @@ export default class PDPStyledWrapper extends Component {
         <strong style={{ fontFamily: "Roboto Condensed" }}>PRICE:</strong>
         <br />
         <strong style={{ fontSize: "2em" }}>
-          {this.getCurrencySymbol(this.props.currency)}
+          {getCurrencySymbol(this.props.currency)}
           {
             this.props.product.prices.filter(
               (price) => price.currency.label == this.props.currency
-            )[0].amount
+            )[0].amount 
           }
         </strong>
         <br />
@@ -74,7 +63,8 @@ export default class PDPStyledWrapper extends Component {
             this.props.addNewItem(
               this.props.product,
               this.props.selectedSize,
-              1
+              1,
+              this.props.product.inStock
             )
           }
         >

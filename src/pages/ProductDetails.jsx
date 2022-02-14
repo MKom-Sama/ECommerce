@@ -8,7 +8,7 @@ import PDPController from "../components/PDPController";
 // Utils
 import { getProductByID } from "../graphQL";
 
-// initial state
+// initial state 
 let loadingProduct = {
   name: "loading...",
   gallery: ["https://t.ly/aHT0"],
@@ -16,6 +16,8 @@ let loadingProduct = {
     { amount: 0.0, currency: { label: "USD" } },
     { amount: 0.0, currency: { label: "GBP" } },
     { amount: 0.0, currency: { label: "JPY" } },
+    { amount: 0.0, currency: { label: "RUB" } },
+    { amount: 0.0, currency: { label: "AUD" } },
   ],
 };
 
@@ -46,6 +48,7 @@ export default class ProductDetails extends Component {
           <MiniImage src={this.getImgInGallery(3)} />
         </MiniGallery>
         <StyledDiv className="responsive-flex">
+          <OutOfStock inStock={this.state.product.inStock}>Out Of Stock</OutOfStock>
           <MainImage style={{ flex: 1 }} src={this.state.product.gallery[0]} />
           <PDPController
             selectSize={this.selectSize}
@@ -94,4 +97,16 @@ const MainImage = styled.img`
   margin: 5px;
   object-fit: cover;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+`;
+const OutOfStock = styled.div`
+  position: absolute;
+  align-self: center;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  text-align:center;
+  top:40%;
+  left:32%;
+  color: #8d8f9a;
+  display: ${(props) => (!props.inStock ? "default" : "none")};
 `;

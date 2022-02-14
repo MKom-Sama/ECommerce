@@ -17,6 +17,7 @@ const getProducts = async () => {
             category
             name
             gallery
+            inStock
             prices {
               amount
               currency {
@@ -40,6 +41,7 @@ const getProductByID = async (p_id) => {
           name
           description
           gallery
+          inStock
           prices {
             amount
             currency {

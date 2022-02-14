@@ -31,6 +31,9 @@ export default class ProductList extends Component {
               (product.category == this.props.category ||
                 this.props.category == "all") && (
                 <ProductItem key={product.id}>
+                  <OutOfStock inStock={product.inStock}>
+                    Out Of Stock
+                  </OutOfStock>
                   <Link
                     style={{
                       all: "initial",
@@ -44,7 +47,7 @@ export default class ProductList extends Component {
                     <ProductImg src={product.gallery[0]} />
                   </Link>
                   <AddToCartButton
-                    onClick={() => this.props.addNewItem(product, "xsm", 1)}
+                    onClick={() => this.props.addNewItem(product, "xsm", 1,product.inStock)}
                   >
                     <CartIcon src={cartIcon} />
                   </AddToCartButton>
@@ -91,9 +94,11 @@ const ProductItem = styled.div`
   padding-bottom: 10px;
   border-radius: 5px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  transition: transform 0.5s ease;
+  ${
+    "" /* transition: transform 0.5s ease;
   &:hover {
     transform: scale(1.01);
+  } */
   }
 `;
 
@@ -124,4 +129,14 @@ const AddToCartButton = styled.button`
 
 const CartIcon = styled.img`
   filter: brightness(0) invert(1);
+`;
+const OutOfStock = styled.div`
+  position: absolute;
+  align-self: center;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  margin-top: 12%;
+  color: #8d8f9a;
+  display: ${(props) => (!props.inStock ? "default" : "none")};
 `;

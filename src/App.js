@@ -54,8 +54,12 @@ class App extends Component {
   };
 
   // Cart Functions
-  addNewItem = (product, size, quantity) => {
+  addNewItem = (product, size, quantity, inStock) => {
     this.setState((state) => {
+      if (inStock === false) {
+        return console.log("Product Out Of Stock Sorry");
+      }
+
       let item = {
         id: `${product.id}+_${size}`,
         name: product.name,
