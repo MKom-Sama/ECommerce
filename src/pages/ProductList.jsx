@@ -61,11 +61,11 @@ export default class ProductList extends Component {
                   </Link>
                   <span style={{ fontSize: "1.2em", marginTop: 8 }}>
                     <strong>{getCurrencySymbol(this.props.currency)}</strong>
-                    {
+                    {parseFloat(
                       product.prices.filter(
                         (price) => price.currency.label == this.props.currency
                       )[0].amount
-                    }
+                    ).toFixed(2)}
                   </span>
                 </ProductItem>
               )
@@ -102,7 +102,7 @@ const AddToCartButton = styled.button`
   justify-content: center;
   cursor: pointer;
   transition: opacity 0.5s ease;
-  opacity:0;
+  opacity: 0;
   &:hover {
     background-color: #66d477;
   }
@@ -117,7 +117,7 @@ const ProductItem = styled.div`
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   }
   &:hover ${AddToCartButton} {
-    opacity:1
+    opacity: 1;
   }
 `;
 

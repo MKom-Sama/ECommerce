@@ -18,9 +18,12 @@ export default class Topbar extends Component {
       <StyledWrapper>
         <ButtonGroup>
           {this.props.categories.map((category) => (
-            <Link to="/" style={{ textDecoration: 'none', cursor:'pointer'}}>
+            <Link
+              key={category}
+              to="/"
+              style={{ textDecoration: "none", cursor: "pointer" }}
+            >
               <StyledButton
-                key={category}
                 onClick={() => this.props.setCategory(category)}
                 btnSelects={category}
                 selectedCat={this.props.category}

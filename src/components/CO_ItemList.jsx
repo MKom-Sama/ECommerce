@@ -24,11 +24,11 @@ export default class CO_ItemList extends Component {
                 <Text style={{ fontWeight: 500 }}>{item.name}</Text>
                 <Text style={{ fontWeight: 900 }}>
                   {getCurrencySymbol(this.props.currency)}
-                  {
+                  {parseFloat(
                     item.prices.filter(
                       (price) => price.currency.label == this.props.currency
                     )[0].amount
-                  }
+                  ).toFixed(2)}
                 </Text>
                 <Sizes>
                   <Box

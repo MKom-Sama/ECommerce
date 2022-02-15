@@ -85,7 +85,7 @@ class App extends Component {
         newCart.push({
           id: elem.id,
           name: elem.name,
-          prices: product.prices,
+          prices: elem.prices,
           quantity: newQuantity,
           size: elem.size,
           gallery: elem.gallery,
@@ -163,7 +163,7 @@ class App extends Component {
           (price) => price.currency.label == this.state.currency
         )[0].amount;
     });
-    return sum;
+    return parseFloat(sum).toFixed(2);
   };
   componentDidUpdate() {
     console.log("cart : ", this.state.cart);
