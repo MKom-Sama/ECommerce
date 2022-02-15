@@ -47,7 +47,9 @@ export default class ProductList extends Component {
                     <ProductImg src={product.gallery[0]} />
                   </Link>
                   <AddToCartButton
-                    onClick={() => this.props.addNewItem(product, "xsm", 1,product.inStock)}
+                    onClick={() =>
+                      this.props.addNewItem(product, "xsm", 1, product.inStock)
+                    }
                   >
                     <CartIcon src={cartIcon} />
                   </AddToCartButton>
@@ -87,32 +89,9 @@ const Grid = styled.div`
   padding-bottom: 5%;
 `;
 
-const ProductItem = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
-  padding-bottom: 10px;
-  border-radius: 5px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  ${
-    "" /* transition: transform 0.5s ease;
-  &:hover {
-    transform: scale(1.01);
-  } */
-  }
-`;
-
-const ProductImg = styled.img`
-  max-height: 95%;
-  flex: 1;
-  object-fit: cover;
-  padding-bottom: 0;
-  margin-bottom: -40%;
-`;
-
 const AddToCartButton = styled.button`
   all: unset;
-  display: flex;
+  display: flex; /* Changed on Hover to Flex */
   background-color: #5ece7b;
   width: 52px;
   height: 52px;
@@ -122,9 +101,32 @@ const AddToCartButton = styled.button`
   margin-right: 5%;
   justify-content: center;
   cursor: pointer;
+  transition: opacity 0.5s ease;
+  opacity:0;
   &:hover {
     background-color: #66d477;
   }
+`;
+const ProductItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  padding-bottom: 10px;
+  border-radius: 5px;
+  &:hover {
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  }
+  &:hover ${AddToCartButton} {
+    opacity:1
+  }
+`;
+
+const ProductImg = styled.img`
+  max-height: 95%;
+  flex: 1;
+  object-fit: cover;
+  padding-bottom: 0;
+  margin-bottom: -40%;
 `;
 
 const CartIcon = styled.img`
