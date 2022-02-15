@@ -70,7 +70,13 @@ export default class CurrencyPicker extends Component {
         >
           <CurrencyList>
             {this.props.currencies.map((curr) => (
-              <Styledli key={curr} onClick={() => this.props.setCurrency(curr)}>
+              <Styledli
+                key={curr}
+                onClick={() => {
+                  this.props.setCurrency(curr);
+                  this.props.closeOverlay();
+                }}
+              >
                 <StyledIcon src={this.getCurrIcon(curr)} />
                 {curr}
               </Styledli>
