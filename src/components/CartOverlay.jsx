@@ -78,6 +78,7 @@ export default class CartOverlay extends Component {
               <Link
                 to="/cart"
                 style={{ textDecoration: "none", color: "#1D1F22" }}
+                onClick={() => this.props.closeOverlay()}
               >
                 VIEW BAG
               </Link>
