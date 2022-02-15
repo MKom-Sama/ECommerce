@@ -89,14 +89,13 @@ const StyledDiv = styled.div`
 const MiniImage = styled.img`
   max-width: 90%;
   max-height: 70%;
-  object-fit: cover;
+  object-fit: contain;
 `;
 const MainImage = styled.img`
   min-width: 50%;
   min-height: 60%;
   margin: 5px;
-  object-fit: cover;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  object-fit: contain;
 `;
 const OutOfStock = styled.div`
   position: absolute;

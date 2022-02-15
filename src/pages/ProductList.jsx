@@ -124,7 +124,7 @@ const ProductItem = styled.div`
 const ProductImg = styled.img`
   max-height: 95%;
   flex: 1;
-  object-fit: cover;
+  object-fit: contain;
   padding-bottom: 0;
   margin-bottom: -40%;
 `;
