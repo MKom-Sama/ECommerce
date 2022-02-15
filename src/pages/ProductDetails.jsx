@@ -8,7 +8,7 @@ import PDPController from "../components/PDPController";
 // Utils
 import { getProductByID } from "../graphQL";
 
-// initial state 
+// initial state
 let loadingProduct = {
   name: "loading...",
   gallery: ["https://t.ly/aHT0"],
@@ -27,29 +27,51 @@ export default class ProductDetails extends Component {
     this.state = {
       selectedSize: "sm", // xsm | sm | md |lrg
       product: loadingProduct,
+
+      // For Gallery
+      mainImg: "",
     };
   }
   componentDidMount() {
     getProductByID(window.location.pathname.split("/")[2]).then((result) =>
-      this.setState({ product: result })
+      this.setState({
+        product: result,
+        mainImg: result.gallery[0],
+      })
     );
   }
   selectSize = (sz) => this.setState({ selectedSize: sz });
-  getImgInGallery = (idx) =>
-    this.state.product.gallery[idx]
-      ? this.state.product.gallery[idx]
-      : this.state.product.gallery[0];
+
+  switchImg = (idx) => {
+    this.setState((state) => {
+      let newGallery = [...state.product.gallery];
+      newGallery[idx] = state.mainImg;
+      let updatedProd = { ...state.product }
+      updatedProd.gallery = newGallery
+
+      return { mainImg: state.product.gallery[idx], product: updatedProd };
+    });
+  };
   render() {
     return (
       <StyledWrapper>
         <MiniGallery className="hide-grid-on-small">
-          <MiniImage src={this.getImgInGallery(1)} />
-          <MiniImage src={this.getImgInGallery(2)} />
-          <MiniImage src={this.getImgInGallery(3)} />
+          {this.state.product.gallery.map(
+            (src, idx) =>
+              idx >= 1 && (
+                <MiniImage
+                  key={idx}
+                  src={src}
+                  onClick={() => this.switchImg(idx)}
+                />
+              )
+          )}
         </MiniGallery>
         <StyledDiv className="responsive-flex">
-          <OutOfStock inStock={this.state.product.inStock}>Out Of Stock</OutOfStock>
-          <MainImage style={{ flex: 1 }} src={this.state.product.gallery[0]} />
+          <OutOfStock inStock={this.state.product.inStock}>
+            Out Of Stock
+          </OutOfStock>
+          <MainImage style={{ flex: 1 }} src={this.state.mainImg} />
           <PDPController
             selectSize={this.selectSize}
             selectedSize={this.state.selectedSize}
@@ -82,18 +104,18 @@ const MiniGallery = styled.div`
 
 const StyledDiv = styled.div`
   width: 100%;
-  height: 500px;
+  height: 560px;
   margin: 1%;
 `;
 
 const MiniImage = styled.img`
-  max-width: 90%;
-  max-height: 70%;
+  max-width: 150px;
+  max-height: 90px;
   object-fit: contain;
 `;
 const MainImage = styled.img`
   min-width: 50%;
-  min-height: 60%;
+  min-height: 102%;
   margin: 5px;
   object-fit: contain;
 `;
@@ -103,9 +125,9 @@ const OutOfStock = styled.div`
   font-style: normal;
   font-weight: bold;
   font-size: 24px;
-  text-align:center;
-  top:40%;
-  left:32%;
+  text-align: center;
+  top: 40%;
+  left: 32%;
   color: #8d8f9a;
   display: ${(props) => (!props.inStock ? "default" : "none")};
 `;
