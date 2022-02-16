@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import styled from "styled-components";
 
+
 // Currency Icons
 import USDIcon from "../assets/svg/currIcons/USD.svg";
 import GBPIcon from "../assets/svg/currIcons/GBP.svg";
@@ -11,6 +12,7 @@ import A$Icon from "../assets/svg/currIcons/A$.svg";
 
 import upIcon from "../assets/svg/up_arrow.svg";
 import downIcon from "../assets/svg/down_arrow.svg";
+
 
 export default class CurrencyPicker extends Component {
   constructor(props) {
@@ -62,7 +64,7 @@ export default class CurrencyPicker extends Component {
         />
         <NonDraggableImg
           src={this.props.visCurrOverlay ? upIcon : downIcon}
-          style={{ marginRight: "1.375em" }}
+          style={{ marginRight: "1.375em",marginBottom: "0.48em" }}
         />
         <DropDownContent
           visible={this.props.visCurrOverlay}
