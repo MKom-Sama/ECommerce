@@ -1,3 +1,5 @@
+import DOMPurify from "dompurify";
+
 const getCurrencySymbol = (curr) => {
   switch (curr) {
     case "USD":
@@ -15,4 +17,8 @@ const getCurrencySymbol = (curr) => {
   }
 };
 
-export { getCurrencySymbol };
+const sanitizeHTML = (data) => ({
+  __html: DOMPurify.sanitize(data),
+});
+
+export { getCurrencySymbol, sanitizeHTML };

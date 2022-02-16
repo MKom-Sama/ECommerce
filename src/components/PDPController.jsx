@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 
-import { getCurrencySymbol } from "../utils";
+import { getCurrencySymbol, sanitizeHTML } from "../utils";
 
 export default class PDPStyledWrapper extends Component {
   constructor(props) {
@@ -51,7 +51,7 @@ export default class PDPStyledWrapper extends Component {
           {
             this.props.product.prices.filter(
               (price) => price.currency.label == this.props.currency
-            )[0].amount 
+            )[0].amount
           }
         </strong>
         <br />
@@ -71,7 +71,7 @@ export default class PDPStyledWrapper extends Component {
           ADD TO CART
         </AddToCartButton>
         <ProductDescription
-          dangerouslySetInnerHTML={{ __html: this.props.product.description }}
+          dangerouslySetInnerHTML={sanitizeHTML(this.props.product.description)}
           className="half-to-full-width"
         >
           {/* {this.props.product.description} */}
