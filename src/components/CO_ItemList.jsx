@@ -116,7 +116,6 @@ const CartItem = styled.li`
   flex-direction: row;
   padding: 8px;
   margin-bottom: 5px;
-  background: #fafafa;
   border-radius: 5px;
 `;
 const Sizes = styled.div`
