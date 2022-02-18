@@ -51,9 +51,9 @@ export default class Topbar extends Component {
             cart={this.props.cart}
             currency={this.props.currency}
             modifyItemCount={this.props.modifyItemCount}
-            modifyItemSize={this.props.modifyItemSize}
             getItemCount={this.props.getItemCount}
             getCartTotalPrice={this.props.getCartTotalPrice}
+            modifyAttr={this.props.modifyAttr}
             // Control
             visCartOverlay={this.props.visCartOverlay}
             togCartOverlay={this.props.togCartOverlay}

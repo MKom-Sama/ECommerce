@@ -2,47 +2,44 @@ import React, { Component } from "react";
 import styled from "styled-components";
 
 import { getCurrencySymbol, sanitizeHTML } from "../utils";
+import DisplayAttributes from "./DisplayAttributes";
 
 export default class PDPStyledWrapper extends Component {
   constructor(props) {
     super(props);
+  }
+  componentDidMount() {
+    console.log(this.props.product);
   }
   render() {
     return (
       <StyledWrapper>
         <h1>{this.props.product.name}</h1>
 
-        <strong style={{ fontFamily: "Roboto Condensed" }}>SIZE:</strong>
-        <Sizes>
-          <Size
-            btnSelects="xsm"
-            onClick={() => this.props.selectSize("xsm")}
-            selectedSize={this.props.selectedSize}
-          >
-            XS
-          </Size>
-          <Size
-            btnSelects="sm"
-            onClick={() => this.props.selectSize("sm")}
-            selectedSize={this.props.selectedSize}
-          >
-            S
-          </Size>
-          <Size
-            btnSelects="md"
-            onClick={() => this.props.selectSize("md")}
-            selectedSize={this.props.selectedSize}
-          >
-            M
-          </Size>
-          <Size
-            btnSelects="lrg"
-            onClick={() => this.props.selectSize("lrg")}
-            selectedSize={this.props.selectedSize}
-          >
-            L
-          </Size>
-        </Sizes>
+        {this.props.product.attributes.map(
+          (attrSet, idx) =>
+            attrSet.type === "text" && (
+              <span key={idx}>
+                <strong style={{ fontFamily: "Roboto Condensed" }}>
+                  {attrSet.name.toUpperCase()}:
+                </strong>
+                <Sizes>
+                  {attrSet.items.map((item, idx) => (
+                    <Size
+                      key={idx}
+                      btnSelects={item.value}
+                      onClick={() =>
+                        this.props.selectAttr(attrSet.name, item.value)
+                      }
+                      selectedAttr={this.props.selectedAttr[attrSet.name]}
+                    >
+                      {item.value}
+                    </Size>
+                  ))}
+                </Sizes>
+              </span>
+            )
+        )}
         <br />
         <strong style={{ fontFamily: "Roboto Condensed" }}>PRICE:</strong>
         <br />
@@ -62,9 +59,9 @@ export default class PDPStyledWrapper extends Component {
           onClick={() =>
             this.props.addNewItem(
               this.props.product,
-              this.props.selectedSize,
               1,
-              this.props.product.inStock
+              this.props.product.inStock,
+              this.props.selectedAttr
             )
           }
         >
@@ -102,9 +99,9 @@ const Size = styled.div`
   border: 3px solid black;
   border-radius: 5px;
   background-color: ${(props) =>
-    props.btnSelects === props.selectedSize ? "#000000" : "#ffffff"};
+    props.btnSelects === props.selectedAttr ? "#000000" : "#ffffff"};
   color: ${(props) =>
-    props.btnSelects === props.selectedSize ? "#ffffff" : "#000000"};
+    props.btnSelects === props.selectedAttr ? "#ffffff" : "#000000"};
   &:hover {
     background-color: #30404d;
     color: #ffffff;

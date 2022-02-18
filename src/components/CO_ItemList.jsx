@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styled, { css } from "styled-components";
 
 import { getCurrencySymbol } from "../utils";
-export default class CO_ItemList extends Component {
+export default class uCO_ItemList extends Component {
   constructor(props) {
     super(props);
   }
@@ -11,8 +11,8 @@ export default class CO_ItemList extends Component {
     return (
       <StyledWrapper>
         <CartList>
-          {this.props.cart.map((item) => (
-            <CartItem key={item.id}>
+          {this.props.cart.map((item, idx) => (
+            <CartItem key={idx}>
               <div
                 style={{
                   display: "flex",
@@ -30,36 +30,34 @@ export default class CO_ItemList extends Component {
                     )[0].amount
                   ).toFixed(2)}
                 </Text>
-                <Sizes>
-                  <Box
-                    name="xsm"
-                    selectedSize={item.size}
-                    onClick={() => this.props.modifyItemSize(item.id, "xsm")}
-                  >
-                    XS
-                  </Box>
-                  <Box
-                    name="sm"
-                    selectedSize={item.size}
-                    onClick={() => this.props.modifyItemSize(item.id, "sm")}
-                  >
-                    S
-                  </Box>
-                  <Box
-                    name="md"
-                    selectedSize={item.size}
-                    onClick={() => this.props.modifyItemSize(item.id, "md")}
-                  >
-                    M
-                  </Box>
-                  <Box
-                    name="lrg"
-                    selectedSize={item.size}
-                    onClick={() => this.props.modifyItemSize(item.id, "lrg")}
-                  >
-                    L
-                  </Box>
-                </Sizes>
+                {item.attributes.map(
+                  (attrSet, idx) =>
+                    attrSet.type === "text" && (
+                      <span key={idx}>
+                        <strong style={{ fontFamily: "Roboto Condensed" }}>
+                          {attrSet.name}:
+                        </strong>
+                        <Sizes>
+                          {attrSet.items.map((attrItem, idx) => (
+                            <Size
+                              key={idx}
+                              btnSelects={attrItem.value}
+                              onClick={() =>
+                                this.props.modifyAttr(
+                                  item.id,
+                                  attrSet.name,
+                                  attrItem.value
+                                )
+                              }
+                              selectedAttr={item.selectedAttr[attrSet.name]}
+                            >
+                              {attrItem.value}
+                            </Size>
+                          ))}
+                        </Sizes>
+                      </span>
+                    )
+                )}
               </div>
               <div
                 style={{
@@ -152,5 +150,24 @@ const Box = styled.button`
         `}
   &:hover {
     background-color: #d7dee3;
+  }
+`;
+const Size = styled.div`
+  all: unset;
+  width: 24px;
+  height: 24px;
+  border: 2px solid black;
+  text-align: center;
+  font-family: Source Sans Pro;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  background-color: ${(props) =>
+    props.btnSelects === props.selectedAttr ? "#000000" : "#ffffff"};
+  color: ${(props) =>
+    props.btnSelects === props.selectedAttr ? "#ffffff" : "#000000"};
+  &:hover {
+    background-color: #30404d;
+    color: #ffffff;
   }
 `;

@@ -48,7 +48,7 @@ export default class ProductList extends Component {
                   </Link>
                   <AddToCartButton
                     onClick={() =>
-                      this.props.addNewItem(product, "xsm", 1, product.inStock)
+                      this.props.addNewItem(product, 1, product.inStock)
                     }
                   >
                     <CartIcon src={cartIcon} />

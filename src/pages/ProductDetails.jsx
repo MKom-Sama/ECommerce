@@ -19,6 +19,7 @@ let loadingProduct = {
     { amount: 0.0, currency: { label: "RUB" } },
     { amount: 0.0, currency: { label: "AUD" } },
   ],
+  attributes: [],
 };
 
 export default class ProductDetails extends Component {
@@ -27,27 +28,47 @@ export default class ProductDetails extends Component {
     this.state = {
       selectedSize: "sm", // xsm | sm | md |lrg
       product: loadingProduct,
+      selectedAttr: {},
 
       // For Gallery
       mainImg: "",
+
+      // Loading
+      loading: true,
     };
   }
   componentDidMount() {
-    getProductByID(window.location.pathname.split("/")[2]).then((result) =>
+    getProductByID(window.location.pathname.split("/")[2]).then((result) => {
+      let defaultAttr = {};
+      result.attributes.forEach((attr) => {
+        defaultAttr[attr.name] = attr.items[0].value;
+      });
       this.setState({
         product: result,
+        selectedAttr: defaultAttr,
         mainImg: result.gallery[0],
-      })
-    );
+        loading: false,
+      });
+    });
+  }
+  componentDidUpdate() {
+    // console.log(this.state.selectedAttr);
   }
   selectSize = (sz) => this.setState({ selectedSize: sz });
+
+  selectAttr = (attrName, attrValue) =>
+    this.setState((state) => {
+      let newAttr = { ...state.selectedAttr };
+      newAttr[attrName] = attrValue;
+      return { selectedAttr: newAttr };
+    });
 
   switchImg = (idx) => {
     this.setState((state) => {
       let newGallery = [...state.product.gallery];
       newGallery[idx] = state.mainImg;
-      let updatedProd = { ...state.product }
-      updatedProd.gallery = newGallery
+      let updatedProd = { ...state.product };
+      updatedProd.gallery = newGallery;
 
       return { mainImg: state.product.gallery[idx], product: updatedProd };
     });
@@ -72,13 +93,15 @@ export default class ProductDetails extends Component {
             Out Of Stock
           </OutOfStock>
           <MainImage style={{ flex: 1 }} src={this.state.mainImg} />
-          <PDPController
-            selectSize={this.selectSize}
-            selectedSize={this.state.selectedSize}
-            product={this.state.product}
-            currency={this.props.currency}
-            addNewItem={this.props.addNewItem}
-          />
+          {!this.state.loading && (
+            <PDPController
+              selectAttr={this.selectAttr}
+              selectedAttr={this.state.selectedAttr}
+              product={this.state.product}
+              currency={this.props.currency}
+              addNewItem={this.props.addNewItem}
+            />
+          )}
         </StyledDiv>
       </StyledWrapper>
     );

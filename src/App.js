@@ -7,6 +7,7 @@ import Topbar from "./components/Topbar";
 import Cart from "./pages/Cart";
 import styled from "styled-components";
 import { getAllCategories, getAllCurrencies } from "./graphQL";
+import { objectEquals, shortUID } from "./utils";
 
 class App extends Component {
   constructor(props) {
@@ -54,20 +55,32 @@ class App extends Component {
   };
 
   // Cart Functions
-  addNewItem = (product, size, quantity, inStock) => {
+  addNewItem = (product, quantity, inStock, selectedAttr = false) => {
     this.setState((state) => {
       if (inStock === false) {
         return console.log("Product Out Of Stock Sorry");
       }
 
+      let defaultAttr = {};
+      if (selectedAttr === false) {
+        // default value
+        product.attributes.forEach((attr) => {
+          defaultAttr[attr.name] = attr.items[0].value;
+        });
+      } else {
+        defaultAttr = selectedAttr;
+      }
+
       let item = {
-        id: `${product.id}+_${size}`,
+        id: shortUID(),
         name: product.name,
         prices: product.prices,
         quantity,
-        size,
         gallery: product.gallery,
+        selectedAttr: defaultAttr,
+        attributes: product.attributes,
       };
+      console.log("Added Item : ", item);
       // Cart Empty
       if (state.cart.length === 0) {
         return { cart: [item] };
@@ -78,7 +91,11 @@ class App extends Component {
       let isNew = true;
       state.cart.forEach((elem) => {
         let newQuantity = elem.quantity;
-        if (elem.id === item.id) {
+        if (
+          elem.name === item.name &&
+          objectEquals(elem.selectedAttr, item.selectedAttr)
+        ) {
+          //TODO Should Change this to attributes.values
           newQuantity = elem.quantity + item.quantity;
           isNew = false;
         }
@@ -87,8 +104,9 @@ class App extends Component {
           name: elem.name,
           prices: elem.prices,
           quantity: newQuantity,
-          size: elem.size,
           gallery: elem.gallery,
+          selectedAttr: elem.selectedAttr,
+          attributes: elem.attributes,
         });
       });
 
@@ -114,35 +132,8 @@ class App extends Component {
             quantity: newQuantity,
             size: item.size,
             gallery: item.gallery,
-          });
-        }
-      });
-      return { cart: newCart };
-    });
-  };
-  modifyItemSize = (id, newSize) => {
-    this.setState((state) => {
-      let newCart = [];
-      // Find and Modify Item
-      state.cart.forEach((item) => {
-        let tempQuantity = item.quantity;
-        if (item.id === id) {
-          item.size = newSize;
-          item.id = item.id.split("+_")[0] + "+_" + newSize;
-        }
-        // Check if item with same id already exists
-        let idx = newCart.findIndex((c_item) => c_item.id == item.id);
-        console.log(idx);
-        if (idx !== -1) {
-          newCart[idx].quantity += tempQuantity;
-        } else {
-          newCart.push({
-            id: item.id,
-            name: item.name,
-            prices: item.prices,
-            quantity: tempQuantity,
-            size: item.size,
-            gallery: item.gallery,
+            selectedAttr: item.selectedAttr,
+            attributes:item.attributes
           });
         }
       });
@@ -165,6 +156,38 @@ class App extends Component {
     });
     return parseFloat(sum).toFixed(2);
   };
+  modifyAttr = (id, attrName, attrValue) =>
+    this.setState((state) => {
+      let newCart = [];
+      // Find & Modify Item
+      state.cart.forEach((item) => {
+        let quantity = item.quantity; // passing by value
+        if (item.id === id) {
+          item.selectedAttr[attrName] = attrValue;
+        }
+        // Check if item with same name & selectedAttr already exists
+        let idx = newCart.findIndex(
+          (c_item) =>
+            c_item.name === item.name &&
+            objectEquals(c_item.selectedAttr, item.selectedAttr)
+        );
+
+        if (idx !== -1) {
+          newCart[idx].quantity += quantity;
+        } else {
+          newCart.push({
+            id: item.id,
+            name: item.name,
+            prices: item.prices,
+            quantity: quantity,
+            gallery: item.gallery,
+            selectedAttr: item.selectedAttr,
+            attributes: item.attributes,
+          });
+        }
+      });
+      return { cart: newCart };
+    });
   componentDidUpdate() {
     console.log("cart : ", this.state.cart);
   }
@@ -183,9 +206,9 @@ class App extends Component {
             // Cart
             cart={this.state.cart}
             modifyItemCount={this.modifyItemCount}
-            modifyItemSize={this.modifyItemSize}
             getItemCount={this.getItemCount}
             getCartTotalPrice={this.getCartTotalPrice}
+            modifyAttr={this.modifyAttr}
             // Overlay Control
             visCurrOverlay={this.state.visCurrOverlay}
             visCartOverlay={this.state.visCartOverlay}
@@ -223,6 +246,7 @@ class App extends Component {
                   currency={this.state.currency}
                   modifyItemCount={this.modifyItemCount}
                   modifyItemSize={this.modifyItemSize}
+                  modifyAttr={this.modifyAttr}
                 />
               }
             />

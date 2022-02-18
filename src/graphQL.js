@@ -24,6 +24,14 @@ const getProducts = async () => {
                 label
               }
             }
+            attributes {
+              name
+              type
+              items {
+                displayValue
+                value
+              }
+            }
           }
         }
       }
@@ -48,6 +56,14 @@ const getProductByID = async (p_id) => {
               label
             }
           }
+          attributes {
+            name
+            type
+            items {
+              displayValue
+              value
+            }
+          }
         }
       }
     `,
@@ -55,7 +71,6 @@ const getProductByID = async (p_id) => {
       pid: p_id,
     },
   });
-  // console.log(data.product)
   return data.product;
 };
 

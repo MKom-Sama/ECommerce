@@ -13,6 +13,7 @@ export default class Cart extends Component {
           currency={this.props.currency}
           modifyItemCount={this.props.modifyItemCount}
           modifyItemSize={this.props.modifyItemSize}
+          modifyAttr={this.props.modifyAttr}
         />
       </StyledWrapper>
     );

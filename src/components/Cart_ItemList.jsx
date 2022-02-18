@@ -60,36 +60,35 @@ export default class Cart_ItemList extends Component {
                     )[0].amount
                   }
                 </h2>
-                <Sizes>
-                  <Box
-                    name="xsm"
-                    selectedSize={item.size}
-                    onClick={() => this.props.modifyItemSize(item.pid, "xsm")}
-                  >
-                    XS
-                  </Box>
-                  <Box
-                    name="sm"
-                    selectedSize={item.size}
-                    onClick={() => this.props.modifyItemSize(item.pid, "sm")}
-                  >
-                    S
-                  </Box>
-                  <Box
-                    name="md"
-                    selectedSize={item.size}
-                    onClick={() => this.props.modifyItemSize(item.pid, "md")}
-                  >
-                    M
-                  </Box>
-                  <Box
-                    name="lrg"
-                    selectedSize={item.size}
-                    onClick={() => this.props.modifyItemSize(item.pid, "lrg")}
-                  >
-                    L
-                  </Box>
-                </Sizes>
+                {item.attributes.map(
+                  (attrSet, idx) =>
+                    attrSet.type === "text" && (
+                      <span key={idx}>
+                        <strong style={{ fontFamily: "Roboto Condensed" }}>
+                          {attrSet.name}:
+                        </strong>
+                        <Sizes>
+                          {attrSet.items.map((attrItem, idx) => (
+                            <Size
+                              key={idx}
+                              btnSelects={attrItem.value}
+                              onClick={() =>
+                                this.props.modifyAttr(
+                                  item.id,
+                                  attrSet.name,
+                                  attrItem.value
+                                )
+                              }
+                              selectedAttr={item.selectedAttr[attrSet.name]}
+                            >
+                              {attrItem.value}
+                            </Size>
+                          ))}
+                        </Sizes>
+                      </span>
+                    )
+                )}
+
               </Left>
               <Right>
                 <div
@@ -104,7 +103,7 @@ export default class Cart_ItemList extends Component {
                   <Box
                     name="plus"
                     style={{ alignSelf: "center" }}
-                    onClick={() => this.props.modifyItemCount(item.pid, 1)}
+                    onClick={() => this.props.modifyItemCount(item.id, 1)}
                   >
                     +
                   </Box>
@@ -112,7 +111,7 @@ export default class Cart_ItemList extends Component {
                   <Box
                     name="minus"
                     style={{ alignSelf: "center" }}
-                    onClick={() => this.props.modifyItemCount(item.pid, -1)}
+                    onClick={() => this.props.modifyItemCount(item.id, -1)}
                   >
                     -
                   </Box>
@@ -198,19 +197,28 @@ const Box = styled.button`
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
-  ${(props) =>
-    props.name === props.selectedSize
-      ? css`
-          cursor: default;
-          background: #000000;
-          color: #ffffff;
-          border: 2px solid #1d1f22;
-        `
-      : css`
-          cursor: pointer;
-        `}
   &:hover {
     background-color: #d7dee3;
+  }
+`;
+const Size = styled.button`
+  all: unset;
+  width: 63px;
+  height: 45px;
+  border: 1px solid black;
+  margin: 5px;
+  text-align: center;
+  font-family: Source Sans Pro;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  background-color: ${(props) =>
+    props.btnSelects === props.selectedAttr ? "#000000" : "#ffffff"};
+  color: ${(props) =>
+    props.btnSelects === props.selectedAttr ? "#ffffff" : "#000000"};
+  &:hover {
+    background-color: #30404d;
+    color: #ffffff;
   }
 `;
 const Text = styled.span`
