@@ -26,7 +26,6 @@ export default class ProductDetails extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedSize: "sm", // xsm | sm | md |lrg
       product: loadingProduct,
       selectedAttr: {},
 
@@ -51,10 +50,6 @@ export default class ProductDetails extends Component {
       });
     });
   }
-  componentDidUpdate() {
-    // console.log(this.state.selectedAttr);
-  }
-  selectSize = (sz) => this.setState({ selectedSize: sz });
 
   selectAttr = (attrName, attrValue) =>
     this.setState((state) => {
@@ -92,7 +87,7 @@ export default class ProductDetails extends Component {
           <OutOfStock inStock={this.state.product.inStock}>
             Out Of Stock
           </OutOfStock>
-          <MainImage style={{ flex: 1 }} src={this.state.mainImg} />
+          <MainImage src={this.state.mainImg} />
           {!this.state.loading && (
             <PDPController
               selectAttr={this.selectAttr}
@@ -137,6 +132,7 @@ const MiniImage = styled.img`
   object-fit: contain;
 `;
 const MainImage = styled.img`
+flex:1;
   min-width: 50%;
   min-height: 102%;
   margin: 5px;

@@ -53,39 +53,25 @@ export default class CartOverlay extends Component {
             modifyItemCount={this.props.modifyItemCount}
             modifyAttr={this.props.modifyAttr}
           />
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              margin: 10,
-            }}
-          >
-            <strong style={{ fontFamily: "Roboto Condensed" }}>Total</strong>
-            <strong style={{ fontWeight: "bold" }}>
+          <TotalPrice>
+            <strong className="robo">Total</strong>
+            <strong className="bold">
               {getCurrencySymbol(this.props.currency)}
               {this.props.getCartTotalPrice()}
             </strong>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              position: "absolute",
-              left: "4%",
-              bottom: "3.70%",
-            }}
-          >
+          </TotalPrice>
+          <ButtonGroup>
             <ViewBag>
               <Link
                 to="/cart"
-                style={{ textDecoration: "none", color: "#1D1F22" }}
+                className="non-decor"
                 onClick={() => this.props.closeOverlay()}
               >
                 VIEW BAG
               </Link>
             </ViewBag>
-
             <CheckoutButton>CHECKOUT</CheckoutButton>
-          </div>
+          </ButtonGroup>
         </DropDownContent>
       </span>
     );
@@ -120,6 +106,11 @@ const Text = styled.span`
   color: #1d1f22;
   font-weight: 700px;
 `;
+const TotalPrice = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin: 10;
+`;
 const StyledButton = styled.button`
   all: unset;
   padding: 15px;
@@ -133,6 +124,12 @@ const StyledButton = styled.button`
   font-size: 14px;
 `;
 
+const ButtonGroup = styled.div`
+  display: flex;
+  position: absolute;
+  left: 4%;
+  bottom: 3.7%;
+`;
 const ViewBag = styled(StyledButton)`
   border: 1px solid #1d1f22;
   font-weight: 600px;

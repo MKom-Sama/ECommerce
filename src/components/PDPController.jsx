@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import styled from "styled-components";
 
 import { getCurrencySymbol, sanitizeHTML } from "../utils";
-import DisplayAttributes from "./DisplayAttributes";
 
 export default class PDPStyledWrapper extends Component {
   constructor(props) {
@@ -20,7 +19,7 @@ export default class PDPStyledWrapper extends Component {
           (attrSet, idx) =>
             attrSet.type === "text" && (
               <span key={idx}>
-                <strong style={{ fontFamily: "Roboto Condensed" }}>
+                <strong className="robo bold">
                   {attrSet.name.toUpperCase()}:
                 </strong>
                 <Sizes>
@@ -41,21 +40,21 @@ export default class PDPStyledWrapper extends Component {
             )
         )}
         <br />
-        <strong style={{ fontFamily: "Roboto Condensed" }}>PRICE:</strong>
+        <strong className="bold robo">PRICE:</strong>
         <br />
-        <strong style={{ fontSize: "2em" }}>
+        <ProductPrice className="bold">
           {getCurrencySymbol(this.props.currency)}
           {
             this.props.product.prices.filter(
               (price) => price.currency.label == this.props.currency
             )[0].amount
           }
-        </strong>
+        </ProductPrice>
         <br />
         <br />
         <br />
         <AddToCartButton
-          className="half-to-full-width"
+          className="half-to-full-width bold"
           onClick={() =>
             this.props.addNewItem(
               this.props.product,
@@ -70,9 +69,8 @@ export default class PDPStyledWrapper extends Component {
         <ProductDescription
           dangerouslySetInnerHTML={sanitizeHTML(this.props.product.description)}
           className="half-to-full-width"
-        >
-          {/* {this.props.product.description} */}
-        </ProductDescription>
+        />
+        
       </StyledWrapper>
     );
   }
@@ -106,6 +104,9 @@ const Size = styled.div`
     background-color: #30404d;
     color: #ffffff;
   }
+`;
+const ProductPrice = styled.strong`
+  font-size: 2em;
 `;
 const AddToCartButton = styled.button`
   border: 0;

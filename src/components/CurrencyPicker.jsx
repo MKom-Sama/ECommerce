@@ -2,38 +2,15 @@ import React, { Component } from "react";
 
 import styled from "styled-components";
 
+import upIcon from "../assets/svg/arrows/up_arrow.svg";
+import downIcon from "../assets/svg/arrows/down_arrow.svg";
 
-// Currency Icons
-import USDIcon from "../assets/svg/currIcons/USD.svg";
-import GBPIcon from "../assets/svg/currIcons/GBP.svg";
-import JPYIcon from "../assets/svg/currIcons/JPY.svg";
-import RUBIcon from "../assets/svg/currIcons/RUB.svg";
-import A$Icon from "../assets/svg/currIcons/A$.svg";
-
-import upIcon from "../assets/svg/up_arrow.svg";
-import downIcon from "../assets/svg/down_arrow.svg";
-
+import { getCurrencyIcon } from "../utils";
 
 export default class CurrencyPicker extends Component {
   constructor(props) {
     super(props);
   }
-  getCurrIcon = (currName) => {
-    switch (currName) {
-      case "USD":
-        return USDIcon;
-      case "GBP":
-        return GBPIcon;
-      case "JPY":
-        return JPYIcon;
-      case "RUB":
-        return RUBIcon;
-      case "AUD":
-        return A$Icon;
-      default:
-        break;
-    }
-  };
 
   myRef = React.createRef();
   handleClickOutCurrOverlay = (e) => {
@@ -58,13 +35,14 @@ export default class CurrencyPicker extends Component {
     return (
       <span ref={this.myRef}>
         <StyledIcon
-          src={this.getCurrIcon(this.props.currency)}
+          src={getCurrencyIcon(this.props.currency)}
           alt="currency"
           onClick={() => this.props.togCurrOverlay()}
+          className="non-drag"
         />
-        <NonDraggableImg
+        <ArrowIcon
           src={this.props.visCurrOverlay ? upIcon : downIcon}
-          style={{ marginRight: "1.375em",marginBottom: "0.48em" }}
+          className="non-drag"
         />
         <DropDownContent
           visible={this.props.visCurrOverlay}
@@ -79,7 +57,7 @@ export default class CurrencyPicker extends Component {
                   this.props.closeOverlay();
                 }}
               >
-                <StyledIcon src={this.getCurrIcon(curr)} />
+                <StyledIcon src={getCurrencyIcon(curr)} />
                 {curr}
               </Styledli>
             ))}
@@ -89,16 +67,7 @@ export default class CurrencyPicker extends Component {
     );
   }
 }
-const NonDraggableImg = styled.img`
-  user-drag: none;
-  -webkit-user-select: none; /* Safari, Chrome */
-  -webkit-user-drag: none;
-  -khtml-user-select: none; /* Konqueror */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* IE */
-  user-select: none; /* CSS3 */
-`;
-const StyledIcon = styled(NonDraggableImg)`
+const StyledIcon = styled.img`
   cursor: pointer;
 `;
 
@@ -133,4 +102,9 @@ const Styledli = styled.li`
     background-color: #e1e8ed;
   }
   transition: background-color 0.2s ease;
+`;
+
+const ArrowIcon = styled.img`
+  margin-right: 1.375em;
+  margin-bottom: 0.48em;
 `;

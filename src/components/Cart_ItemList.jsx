@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import { getCurrencySymbol } from "../utils";
 
-import rightIcon from "../assets/svg/right_arrow.svg";
-import leftIcon from "../assets/svg/left_arrow.svg";
+import rightIcon from "../assets/svg/arrows/right_arrow.svg";
+import leftIcon from "../assets/svg/arrows/left_arrow.svg";
 
 export default class Cart_ItemList extends Component {
   constructor(props) {
@@ -52,7 +52,7 @@ export default class Cart_ItemList extends Component {
             <CartItem key={item.pid}>
               <Left>
                 <Text>{item.name}</Text>
-                <h2 style={{ fontWeight: 900 }}>
+                <h2>
                   {getCurrencySymbol(this.props.currency)}
                   {
                     item.prices.filter(
@@ -64,9 +64,7 @@ export default class Cart_ItemList extends Component {
                   (attrSet, idx) =>
                     attrSet.type === "text" && (
                       <span key={idx}>
-                        <strong style={{ fontFamily: "Roboto Condensed" }}>
-                          {attrSet.name}:
-                        </strong>
+                        <strong className="robo">{attrSet.name}:</strong>
                         <Sizes>
                           {attrSet.items.map((attrItem, idx) => (
                             <Size
@@ -88,21 +86,11 @@ export default class Cart_ItemList extends Component {
                       </span>
                     )
                 )}
-
               </Left>
               <Right>
-                <div
-                  style={{
-                    display: "flex",
-                    flex: 1,
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                    textAlign: "center",
-                  }}
-                >
+                <BoxGroup>
                   <Box
                     name="plus"
-                    style={{ alignSelf: "center" }}
                     onClick={() => this.props.modifyItemCount(item.id, 1)}
                   >
                     +
@@ -110,33 +98,25 @@ export default class Cart_ItemList extends Component {
                   <span>{item.quantity}</span>
                   <Box
                     name="minus"
-                    style={{ alignSelf: "center" }}
                     onClick={() => this.props.modifyItemCount(item.id, -1)}
                   >
                     -
                   </Box>
-                </div>
+                </BoxGroup>
                 <div>
-                  <img
-                    style={{
-                      flex: 4,
-                      maxWidth: "141px",
-                      maxHeight: "185px",
-                      minWidth: "141px",
-                      minHeight: "185px",
-                    }}
+                  <ProductImg
                     className="non-drag"
                     src={this.getFirstImg(item.id)}
-                  ></img>
+                  />
                   <Arrows>
                     <img
                       onClick={() => this.changeImg(item.id, -1)}
-                      style={{ cursor: "pointer" }}
+                      className="non-decor"
                       src={leftIcon}
                     />
                     <img
                       onClick={() => this.changeImg(item.id, 1)}
-                      style={{ cursor: "pointer" }}
+                      className="non-decor"
                       src={rightIcon}
                     />
                   </Arrows>
@@ -186,6 +166,22 @@ const Sizes = styled.div`
   justify-content: space-between;
   width: 60%;
 `;
+const ProductImg = styled.img`
+  flex: 4;
+  max-width: 141px;
+  max-height: 185px;
+  min-width: 141px;
+  min-height: 185px;
+`;
+
+const BoxGroup = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+`;
+
 const Box = styled.button`
   all: unset;
   width: 63px;
@@ -196,6 +192,7 @@ const Box = styled.button`
   font-family: Source Sans Pro;
   font-style: normal;
   font-weight: normal;
+  align-self: center;
   font-size: 14px;
   &:hover {
     background-color: #d7dee3;

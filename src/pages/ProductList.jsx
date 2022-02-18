@@ -22,9 +22,7 @@ export default class ProductList extends Component {
   render() {
     return (
       <StyledWrapper>
-        <span style={{ fontSize: "2em" }}>
-          {this.props.category.toUpperCase()}
-        </span>
+        <CategoryName>{this.props.category.toUpperCase()}</CategoryName>
         <Grid>
           {this.state.products.map(
             (product) =>
@@ -34,18 +32,9 @@ export default class ProductList extends Component {
                   <OutOfStock inStock={product.inStock}>
                     Out Of Stock
                   </OutOfStock>
-                  <Link
-                    style={{
-                      all: "initial",
-                      display: "flex",
-                      flexDirection: "column",
-                      flex: 1,
-                      maxHeight: "80%",
-                    }}
-                    to={`/product/${product.id}`}
-                  >
+                  <LinkToPDP to={`/product/${product.id}`}>
                     <ProductImg src={product.gallery[0]} />
-                  </Link>
+                  </LinkToPDP>
                   <AddToCartButton
                     onClick={() =>
                       this.props.addNewItem(product, 1, product.inStock)
@@ -53,20 +42,19 @@ export default class ProductList extends Component {
                   >
                     <CartIcon src={cartIcon} />
                   </AddToCartButton>
-                  <Link
-                    style={{ all: "initial", cursor: "pointer" }}
-                    to={`/product/${product.id}`}
-                  >
-                    <span style={{ fontSize: "1.4em" }}>{product.name}</span>
+                  <Link className="non-decor" to={`/product/${product.id}`}>
+                    <ProductName>{product.name}</ProductName>
                   </Link>
-                  <span style={{ fontSize: "1.2em", marginTop: 8 }}>
-                    <strong>{getCurrencySymbol(this.props.currency)}</strong>
+                  <ProductPrice style={{ fontSize: "1.2em", marginTop: 8 }}>
+                    <strong className="bold">
+                      {getCurrencySymbol(this.props.currency)}
+                    </strong>
                     {parseFloat(
                       product.prices.filter(
                         (price) => price.currency.label == this.props.currency
                       )[0].amount
                     ).toFixed(2)}
-                  </span>
+                  </ProductPrice>
                 </ProductItem>
               )
           )}
@@ -87,6 +75,15 @@ const Grid = styled.div`
   grid-gap: 5%;
   padding-top: 4%;
   padding-bottom: 5%;
+`;
+
+const ProductName = styled.span`
+  font-size: 1.4em;
+`;
+
+const ProductPrice = styled.span`
+  font-size: 1.2em;
+  margin-top: 8px;
 `;
 
 const AddToCartButton = styled.button`
@@ -129,6 +126,13 @@ const ProductImg = styled.img`
   margin-bottom: -40%;
 `;
 
+const LinkToPDP = styled(Link)`
+  all: initial;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  max-height: 80%;
+`;
 const CartIcon = styled.img`
   filter: brightness(0) invert(1);
 `;
@@ -141,4 +145,8 @@ const OutOfStock = styled.div`
   margin-top: 12%;
   color: #8d8f9a;
   display: ${(props) => (!props.inStock ? "default" : "none")};
+`;
+
+const CategoryName = styled.strong`
+  font-size: 2em;
 `;

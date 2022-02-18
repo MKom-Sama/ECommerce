@@ -16,8 +16,8 @@ class App extends Component {
       categories: [],
       currencies: [],
 
-      category: "women", // all || tech || clothes ( selected cat)
-      currency: "USD", // USD || GBP || JPY || AUD || RUB (selected curr)
+      category: "", // all || tech || clothes ( selected cat)
+      currency: "", // USD || GBP || JPY || AUD || RUB (selected curr)
       cart: [], // { id , name , prices , quantity , size , gallery }
 
       // Overlay Control
@@ -245,7 +245,6 @@ class App extends Component {
                   cart={this.state.cart}
                   currency={this.state.currency}
                   modifyItemCount={this.modifyItemCount}
-                  modifyItemSize={this.modifyItemSize}
                   modifyAttr={this.modifyAttr}
                 />
               }

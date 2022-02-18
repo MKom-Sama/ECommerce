@@ -1,5 +1,12 @@
 import DOMPurify from "dompurify";
 
+// Currency Icons
+import USDIcon from "./assets/svg/currIcons/USD.svg";
+import GBPIcon from "./assets/svg/currIcons/GBP.svg";
+import JPYIcon from "./assets/svg/currIcons/JPY.svg";
+import RUBIcon from "./assets/svg/currIcons/RUB.svg";
+import A$Icon from "./assets/svg/currIcons/A$.svg";
+
 const getCurrencySymbol = (curr) => {
   switch (curr) {
     case "USD":
@@ -46,4 +53,21 @@ function shortUID() {
   secondPart = ("000" + secondPart.toString(36)).slice(-3);
   return firstPart + secondPart;
 }
-export { getCurrencySymbol, sanitizeHTML, objectEquals, shortUID };
+
+const getCurrencyIcon = (currName) => {
+  switch (currName) {
+    case "USD":
+      return USDIcon;
+    case "GBP":
+      return GBPIcon;
+    case "JPY":
+      return JPYIcon;
+    case "RUB":
+      return RUBIcon;
+    case "AUD":
+      return A$Icon;
+    default:
+      break;
+  }
+}
+export { getCurrencySymbol,getCurrencyIcon, sanitizeHTML, objectEquals, shortUID };

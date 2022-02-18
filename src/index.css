@@ -17,7 +17,21 @@ body {
 /* Global */
 * {
   font-family: Raleway;
+  /* font-weight: bold; */
+}
+
+.robo{
+  font-family: Roboto Condensed;
+}
+
+.bold{
   font-weight: bold;
+}
+
+.non-decor {
+  text-decoration: none;
+  cursor: pointer;
+  color:  #1d1f22;
 }
 
 .non-drag {
@@ -28,6 +42,7 @@ body {
   -ms-user-select: none; /* IE */
   user-select: none; /* CSS3 */
 }
+
 /* Global Animation Classes */
 @keyframes fade {
   from {
