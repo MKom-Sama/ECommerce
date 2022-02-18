@@ -16,8 +16,8 @@ class App extends Component {
       categories: [],
       currencies: [],
 
-      category: "", // all || tech || clothes ( selected cat)
-      currency: "", // USD || GBP || JPY || AUD || RUB (selected curr)
+      category: "all", // all || tech || clothes ( selected cat)
+      currency: "USD", // USD || GBP || JPY || AUD || RUB (selected curr)
       cart: [], // { id , name , prices , quantity , size , gallery }
 
       // Overlay Control
@@ -151,7 +151,7 @@ class App extends Component {
       sum +=
         item.quantity *
         item.prices.filter(
-          (price) => price.currency.label == this.state.currency
+          (price) => price.currency.label === this.state.currency
         )[0].amount;
     });
     return parseFloat(sum).toFixed(2);
