@@ -50,6 +50,7 @@ const getProductByID = async (p_id) => {
           description
           gallery
           inStock
+          brand
           prices {
             amount
             currency {

@@ -12,7 +12,9 @@ export default class PDPStyledWrapper extends Component {
   render() {
     return (
       <StyledWrapper>
+        
         <h1>{this.props.product.name}</h1>
+        <h3>{this.props.product.brand}</h3>
 
         {/* For Type text Attributes */}
         {this.props.product.attributes.map(
