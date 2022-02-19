@@ -60,6 +60,7 @@ export default class Cart_ItemList extends Component {
                     )[0].amount
                   }
                 </h2>
+                {/* For Type text Attributes */}
                 {item.attributes.map(
                   (attrSet, idx) =>
                     attrSet.type === "text" && (
@@ -81,6 +82,32 @@ export default class Cart_ItemList extends Component {
                             >
                               {attrItem.value}
                             </Size>
+                          ))}
+                        </Sizes>
+                      </span>
+                    )
+                )}
+                {/* For Type swatch Attributes */}
+                {item.attributes.map(
+                  (attrSet, idx) =>
+                    attrSet.type === "swatch" && (
+                      <span key={idx}>
+                        <strong className="robo bold">{attrSet.name}:</strong>
+                        <Sizes>
+                          {attrSet.items.map((attrItem, idx) => (
+                            <SwatchBox
+                              key={idx}
+                              btnSelects={attrItem.displayValue}
+                              swatchColor={attrItem.value}
+                              onClick={() =>
+                                this.props.modifyAttr(
+                                  item.id,
+                                  attrSet.name,
+                                  attrItem.displayValue
+                                )
+                              }
+                              selectedAttr={item.selectedAttr[attrSet.name]}
+                            />
                           ))}
                         </Sizes>
                       </span>
@@ -113,11 +140,13 @@ export default class Cart_ItemList extends Component {
                       onClick={() => this.changeImg(item.id, -1)}
                       className="non-decor"
                       src={leftIcon}
+                      alt="arrow_left"
                     />
                     <img
                       onClick={() => this.changeImg(item.id, 1)}
                       className="non-decor"
                       src={rightIcon}
+                      alt="arrow_right"
                     />
                   </Arrows>
                 </div>
@@ -217,6 +246,23 @@ const Size = styled.button`
     background-color: #30404d;
     color: #ffffff;
   }
+`;
+const SwatchBox = styled.div`
+  all: unset;
+  width: 63px;
+  height: 45px;
+  border: 1px solid black;
+  margin: 5px;
+  text-align: center;
+  font-family: Source Sans Pro;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  background-color: ${(props) =>
+    props.btnSelects === props.selectedAttr
+      ? `${props.swatchColor}`
+      : "#ffffff"};
+  border-color: ${(props) => props.swatchColor};
 `;
 const Text = styled.span`
   font-style: normal;

@@ -4,17 +4,17 @@ import styled from "styled-components";
 import { getCurrencySymbol, sanitizeHTML } from "../utils";
 
 export default class PDPStyledWrapper extends Component {
-  constructor(props) {
-    super(props);
-  }
+
   componentDidMount() {
     console.log(this.props.product);
   }
+
   render() {
     return (
       <StyledWrapper>
         <h1>{this.props.product.name}</h1>
 
+        {/* For Type text Attributes */}
         {this.props.product.attributes.map(
           (attrSet, idx) =>
             attrSet.type === "text" && (
@@ -39,6 +39,31 @@ export default class PDPStyledWrapper extends Component {
               </span>
             )
         )}
+        {/* For Type swatch Attributes */}
+        {this.props.product.attributes.map(
+          (attrSet, idx) =>
+            attrSet.type === "swatch" && (
+              <span key={idx}>
+                <strong className="robo bold">
+                  {attrSet.name.toUpperCase()}:
+                </strong>
+                <Sizes>
+                  {attrSet.items.map((item, idx) => (
+                    <SwatchBox
+                      key={idx}
+                      btnSelects={item.displayValue}
+                      swatchColor={item.value}
+                      onClick={() =>
+                        this.props.selectAttr(attrSet.name, item.displayValue)
+                      }
+                      selectedAttr={this.props.selectedAttr[attrSet.name]}
+                    >
+                    </SwatchBox>
+                  ))}
+                </Sizes>
+              </span>
+            )
+        )}
         <br />
         <strong className="bold robo">PRICE:</strong>
         <br />
@@ -46,7 +71,7 @@ export default class PDPStyledWrapper extends Component {
           {getCurrencySymbol(this.props.currency)}
           {
             this.props.product.prices.filter(
-              (price) => price.currency.label == this.props.currency
+              (price) => price.currency.label === this.props.currency
             )[0].amount
           }
         </ProductPrice>
@@ -70,7 +95,6 @@ export default class PDPStyledWrapper extends Component {
           dangerouslySetInnerHTML={sanitizeHTML(this.props.product.description)}
           className="half-to-full-width"
         />
-        
       </StyledWrapper>
     );
   }
@@ -104,6 +128,24 @@ const Size = styled.div`
     background-color: #30404d;
     color: #ffffff;
   }
+`;
+const SwatchBox = styled.div`
+  width: 63px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+  font-family: "Raleaway";
+  font-weight: 100;
+  font-size: 1.4em;
+  border: 3px solid;
+  border-radius: 5px;
+  background-color: ${(props) =>
+    props.btnSelects === props.selectedAttr
+      ? `${props.swatchColor}`
+    : "#ffffff"};
+  border-color:${props=>props.swatchColor}
 `;
 const ProductPrice = styled.strong`
   font-size: 2em;
