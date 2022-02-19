@@ -26,8 +26,8 @@ export default class ProductList extends Component {
         <Grid>
           {this.state.products.map(
             (product) =>
-              (product.category == this.props.category ||
-                this.props.category == "all") && (
+              (product.category === this.props.category ||
+                this.props.category === "all") && (
                 <ProductItem key={product.id}>
                   <OutOfStock inStock={product.inStock}>
                     Out Of Stock
@@ -45,13 +45,13 @@ export default class ProductList extends Component {
                   <Link className="non-decor" to={`/product/${product.id}`}>
                     <ProductName>{product.name}</ProductName>
                   </Link>
-                  <ProductPrice style={{ fontSize: "1.2em", marginTop: 8 }}>
+                  <ProductPrice>
                     <strong className="bold">
                       {getCurrencySymbol(this.props.currency)}
                     </strong>
                     {parseFloat(
                       product.prices.filter(
-                        (price) => price.currency.label == this.props.currency
+                        (price) => price.currency.label === this.props.currency
                       )[0].amount
                     ).toFixed(2)}
                   </ProductPrice>
