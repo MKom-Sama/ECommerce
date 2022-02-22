@@ -135,20 +135,22 @@ export default class Cart_ItemList extends Component {
                     className="non-drag"
                     src={this.getFirstImg(item.id)}
                   />
-                  <Arrows>
-                    <img
-                      onClick={() => this.changeImg(item.id, -1)}
-                      className="non-decor"
-                      src={leftIcon}
-                      alt="arrow_left"
-                    />
-                    <img
-                      onClick={() => this.changeImg(item.id, 1)}
-                      className="non-decor"
-                      src={rightIcon}
-                      alt="arrow_right"
-                    />
-                  </Arrows>
+                  {item.gallery.length > 1 && (
+                    <Arrows>
+                      <img
+                        onClick={() => this.changeImg(item.id, -1)}
+                        className="non-decor"
+                        src={leftIcon}
+                        alt="arrow_left"
+                      />
+                      <img
+                        onClick={() => this.changeImg(item.id, 1)}
+                        className="non-decor"
+                        src={rightIcon}
+                        alt="arrow_right"
+                      />
+                    </Arrows>
+                  )}
                 </div>
               </Right>
             </CartItem>
