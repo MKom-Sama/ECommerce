@@ -30,14 +30,14 @@ const sanitizeHTML = (data) => ({
 
 const objectEquals = (obj1, obj2) => {
   for (let i in obj1) {
-    if (obj1.hasOwnProperty(i)) {
-      if (!obj2.hasOwnProperty(i)) return false;
+    if (Object.prototype.hasOwnProperty.call(obj1,i)) {
+      if (!Object.prototype.hasOwnProperty.call(obj2,i)) return false;
       if (obj1[i] !== obj2[i]) return false;
     }
   }
   for (let i in obj2) {
-    if (obj2.hasOwnProperty(i)) {
-      if (!obj1.hasOwnProperty(i)) return false;
+    if (Object.prototype.hasOwnProperty.call(obj2,i)) {
+      if (!Object.prototype.hasOwnProperty.call(obj1,i)) return false;
       if (obj1[i] !== obj2[i]) return false;
     }
   }
