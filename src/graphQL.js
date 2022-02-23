@@ -18,6 +18,7 @@ const getProducts = async () => {
             name
             gallery
             inStock
+            brand
             prices {
               amount
               currency {

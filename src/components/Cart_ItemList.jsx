@@ -48,9 +48,11 @@ export default class Cart_ItemList extends Component {
     return (
       <StyledWrapper>
         <CartList>
-          {this.props.cart.map((item) => (
-            <CartItem key={item.pid}>
+          {this.props.cart.map((item,idx) => (
+            <CartItem key={idx}>
               <Left>
+               
+                <Text className="bold robo">{item.brand}</Text>
                 <Text>{item.name}</Text>
                 <h2>
                   {getCurrencySymbol(this.props.currency)}

@@ -79,6 +79,7 @@ class App extends Component {
         gallery: product.gallery,
         selectedAttr: defaultAttr,
         attributes: product.attributes,
+        brand:product.brand
       };
       console.log("Added Item : ", item);
       // Cart Empty
@@ -107,6 +108,7 @@ class App extends Component {
           gallery: elem.gallery,
           selectedAttr: elem.selectedAttr,
           attributes: elem.attributes,
+          brand:elem.brand
         });
       });
 
@@ -134,6 +136,7 @@ class App extends Component {
             gallery: item.gallery,
             selectedAttr: item.selectedAttr,
             attributes: item.attributes,
+            brand:item.brand
           });
         }
       });
@@ -183,6 +186,7 @@ class App extends Component {
             gallery: item.gallery,
             selectedAttr: item.selectedAttr,
             attributes: item.attributes,
+            brand:item.brand
           });
         }
       });

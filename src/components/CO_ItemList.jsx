@@ -12,7 +12,8 @@ export default class CO_ItemList extends Component {
           {this.props.cart.map((item, idx) => (
             <CartItem key={idx}>
               <Left>
-                <Text className="bold">{item.name}</Text>
+                <Text >{item.brand}</Text>
+                <Text>{item.name}</Text>
                 <Text className="bold">
                   {getCurrencySymbol(this.props.currency)}
                   {parseFloat(

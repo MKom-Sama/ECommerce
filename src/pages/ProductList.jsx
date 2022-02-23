@@ -44,7 +44,9 @@ export default class ProductList extends Component {
                     <CartIcon src={cartIcon} />
                   </AddToCartButton>
                   <Link className="non-decor" to={`/product/${product.id}`}>
-                    <ProductName>{product.name}</ProductName>
+                    <ProductName>
+                      {product.brand + " " + product.name}
+                    </ProductName>
                   </Link>
                   <ProductPrice>
                     <strong className="bold">
@@ -90,7 +92,6 @@ const Grid = styled.div`
 const ProductName = styled.span`
   font-size: 1.4em;
 `;
-
 const ProductPrice = styled.span`
   font-size: 1.2em;
   margin-top: 8px;

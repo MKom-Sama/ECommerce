@@ -13,8 +13,8 @@ export default class PDPController extends Component {
     return (
       <StyledWrapper>
         
+        <h1 className="robo">{this.props.product.brand}</h1>
         <h1>{this.props.product.name}</h1>
-        <h3>{this.props.product.brand}</h3>
 
         {/* For Type text Attributes */}
         {this.props.product.attributes.map(
@@ -120,8 +120,7 @@ const Sizes = styled.div`
   display: flex;
 `;
 const Size = styled.div`
-  width: 63px;
-  height: 45px;
+  padding:10px;
   display: flex;
   align-items: center;
   justify-content: center;
