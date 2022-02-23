@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
 // Components
 import PDPController from "../components/PDPController";
@@ -102,8 +103,14 @@ export default class ProductDetails extends Component {
     );
   }
 }
-
-// Styles
+/* ESLINT */
+ProductDetails.propTypes = {
+  // Currency
+  currency: PropTypes.string,
+  // Cart
+  addNewItem: PropTypes.func,
+};
+/* STYLES */
 const StyledWrapper = styled.div`
   padding: 2% 7.013% 0% 8.125%;
   display: flex;

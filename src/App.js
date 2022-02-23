@@ -1,4 +1,4 @@
-import React,{ Component } from "react";
+import React, { Component } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import ProductList from "./pages/ProductList";
@@ -133,7 +133,7 @@ class App extends Component {
             size: item.size,
             gallery: item.gallery,
             selectedAttr: item.selectedAttr,
-            attributes:item.attributes
+            attributes: item.attributes,
           });
         }
       });

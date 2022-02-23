@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
 // Icons
 import cartIcon from "../assets/svg/cart.svg";
@@ -64,7 +65,16 @@ export default class ProductList extends Component {
   }
 }
 
-// Styles
+/* ESLINT */
+ProductList.propTypes = {
+  // Currency
+  currency: PropTypes.string,
+  // Category
+  category: PropTypes.string,
+  // Cart
+  addNewItem: PropTypes.func,
+};
+/* STYLES */
 const StyledWrapper = styled.div`
   padding: 2% 7.013% 0% 8.125%;
 `;

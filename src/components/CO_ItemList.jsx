@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import styled, { css } from "styled-components";
+import PropTypes from "prop-types";
 
 import { getCurrencySymbol } from "../utils";
 export default class CO_ItemList extends Component {
+
   render() {
     return (
       <StyledWrapper>
@@ -96,8 +98,15 @@ export default class CO_ItemList extends Component {
     );
   }
 }
+/* ESLINT */
+CO_ItemList.propTypes = {
+  cart: PropTypes.array,
+  currency: PropTypes.string,
+  modifyItemCount: PropTypes.func,
+  modifyAttr: PropTypes.func,
+}
 
-// Styles
+/* STYLES */
 const StyledWrapper = styled.div`
   display: flex;
   flex-direction: column;

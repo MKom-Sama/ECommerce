@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-
+import PropTypes from "prop-types";
 // Icons
 import cartIcon from "../assets/svg/cart.svg";
 import CO_ItemList from "./CO_ItemList";
@@ -77,7 +77,23 @@ export default class CartOverlay extends Component {
     );
   }
 }
-// Styles
+/* ESLINT */
+CartOverlay.propTypes = {
+  // Currency
+  currency: PropTypes.string,
+  // Cart
+  cart: PropTypes.array,
+  modifyItemCount: PropTypes.func,
+  getItemCount: PropTypes.func,
+  getCartTotalPrice: PropTypes.func,
+  modifyAttr: PropTypes.func,
+  // Overlay Control
+  visCartOverlay: PropTypes.bool,
+  togCartOverlay: PropTypes.func,
+  closeOverlay: PropTypes.func,
+};
+
+/* STYLES */
 const StyledIcon = styled.img`
   cursor: pointer;
 `;

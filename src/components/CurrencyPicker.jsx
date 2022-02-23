@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import styled from "styled-components";
-
+import PropTypes from "prop-types";
 import upIcon from "../assets/svg/arrows/up_arrow.svg";
 import downIcon from "../assets/svg/arrows/down_arrow.svg";
 
@@ -67,6 +67,19 @@ export default class CurrencyPicker extends Component {
     );
   }
 }
+/* ESLINT */
+CurrencyPicker.propTypes = {
+  // Currency
+  currency: PropTypes.string,
+  currencies: PropTypes.array,
+  setCurrency: PropTypes.func,
+  // Overlay Control
+  visCurrOverlay: PropTypes.bool,
+  togCurrOverlay: PropTypes.func,
+  closeOverlay: PropTypes.func,
+};
+
+/* STYLES */
 const StyledIcon = styled.img`
   cursor: pointer;
 `;

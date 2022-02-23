@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-
+import PropTypes from "prop-types";
 import { getCurrencySymbol, sanitizeHTML } from "../utils";
 
-export default class PDPStyledWrapper extends Component {
+export default class PDPController extends Component {
 
   componentDidMount() {
     console.log(this.props.product);
@@ -101,6 +101,15 @@ export default class PDPStyledWrapper extends Component {
     );
   }
 }
+/* ESLINT */
+PDPController.propTypes = {
+  selectAttr:PropTypes.func,
+  selectedAttr:PropTypes.object,
+  product:PropTypes.object,
+  currency:PropTypes.string,
+  addNewItem:PropTypes.func,
+}
+/* STYLES */
 const StyledWrapper = styled.div`
   flex: 1;
   justify-content: center;

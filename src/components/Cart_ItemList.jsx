@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import styled from "styled-components";
-
+import PropTypes from "prop-types";
 import { getCurrencySymbol } from "../utils";
 
 import rightIcon from "../assets/svg/arrows/right_arrow.svg";
@@ -160,6 +160,14 @@ export default class Cart_ItemList extends Component {
     );
   }
 }
+/* ESLINT */
+Cart_ItemList.propTypes = {
+  currency: PropTypes.string,
+  cart: PropTypes.array,
+  modifyItemCount: PropTypes.func,
+  modifyAttr: PropTypes.func,
+} 
+/* STYLES */
 const StyledWrapper = styled.div`
   height: 100%;
   padding-right: 16.8%;

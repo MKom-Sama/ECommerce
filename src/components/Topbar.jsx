@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-
+import PropTypes from "prop-types";
 // Icons
 import appLogo from "../assets/svg/a-logo.svg";
 
@@ -66,7 +66,29 @@ export default class Topbar extends Component {
     );
   }
 }
-
+/* ESLINT */
+Topbar.propTypes = {
+  // Currency
+  currency: PropTypes.string,
+  currencies: PropTypes.array,
+  setCurrency: PropTypes.func,
+  // Category
+  category: PropTypes.string,
+  categories: PropTypes.array,
+  setCategory: PropTypes.func,
+  // Cart
+  cart: PropTypes.array,
+  modifyItemCount: PropTypes.func,
+  getItemCount: PropTypes.func,
+  getCartTotalPrice: PropTypes.func,
+  modifyAttr: PropTypes.func,
+  // Overlay Control
+  visCurrOverlay: PropTypes.bool,
+  visCartOverlay: PropTypes.bool,
+  togCurrOverlay: PropTypes.func,
+  togCartOverlay: PropTypes.func,
+  closeOverlay: PropTypes.func,
+};
 /* STYLES */
 const StyledWrapper = styled.div`
   position: sticky;
