@@ -239,15 +239,14 @@ const Box = styled.button`
 `;
 const Size = styled.button`
   all: unset;
-  width: 63px;
-  height: 45px;
+  padding:10px;
   border: 1px solid black;
   margin: 5px;
   text-align: center;
   font-family: Source Sans Pro;
   font-style: normal;
   font-weight: normal;
-  font-size: 14px;
+  font-size: 16px;
   background-color: ${(props) =>
     props.btnSelects === props.selectedAttr ? "#000000" : "#ffffff"};
   color: ${(props) =>

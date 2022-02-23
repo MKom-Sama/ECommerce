@@ -26,7 +26,7 @@ export default class CO_ItemList extends Component {
                   (attrSet, idx) =>
                     attrSet.type === "text" && (
                       <span key={idx}>
-                        <strong className="bold robo">{attrSet.name}:</strong>
+                        <span className="robo">{attrSet.name}:</span>
                         <Sizes>
                           {attrSet.items.map((attrItem, idx) => (
                             <Size
@@ -53,7 +53,7 @@ export default class CO_ItemList extends Component {
                   (attrSet, idx) =>
                     attrSet.type === "swatch" && (
                       <span key={idx}>
-                        <strong className="robo bold">{attrSet.name}:</strong>
+                        <span className="robo">{attrSet.name}:</span>
                         <Sizes>
                           {attrSet.items.map((attrItem, idx) => (
                             <SwatchBox
@@ -178,8 +178,7 @@ const Box = styled.button`
 `;
 const Size = styled.div`
   all: unset;
-  width: 24px;
-  height: 24px;
+  padding:5px;
   border: 2px solid black;
   text-align: center;
   font-family: Source Sans Pro;
