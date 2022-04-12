@@ -1,48 +1,33 @@
 {
-  "name": "scandiweb",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@apollo/client": "^3.5.8",
-    "@testing-library/jest-dom": "^5.16.1",
-    "@testing-library/react": "^12.1.2",
-    "@testing-library/user-event": "^13.5.0",
-    "dompurify": "^2.3.6",
-    "graphql": "^16.3.0",
-    "prop-types": "^15.8.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-router-dom": "^6.2.1",
-    "react-scripts": "5.0.0",
-    "styled-components": "^5.3.3",
-    "web-vitals": "^2.1.4"
-  },
+  "name": "ecommerce",
+  "version": "1.0.0",
+  "description": "Simple E-commerce App",
+  "main": "server.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "cd client && npm start",
+    "dev": "concurrently -n 'server,client' -c 'green,blue' \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "cd client && ((npm install) && (npm run build))"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MKom-Sama/ECommerce.git"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MKom-Sama/ECommerce/issues"
   },
-  "devDependencies": {
-    "eslint": "^8.9.0",
-    "eslint-plugin-react": "^7.28.0"
+  "homepage": "https://github.com/MKom-Sama/ECommerce#readme",
+  "dependencies": {
+    "apollo-server": "^3.6.7",
+    "apollo-server-core": "^3.6.7",
+    "apollo-server-express": "^3.6.7",
+    "cors": "^2.8.5",
+    "express": "^4.17.3",
+    "express-graphql": "^0.7.1",
+    "graphql": "^14.7.0"
   }
 }
